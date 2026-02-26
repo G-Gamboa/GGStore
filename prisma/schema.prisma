@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String        @id @default(cuid())
+  externalId  Int?          @unique
+  name        String
+  description String?
+  slug        String        @unique
+  priceQ      Int           // precio exacto en quetzales (sin decimales)
+  brand       String?
+  size        String?
+  color       String?
+  condition   Int?          // 1-10
+  gender      String?
+  imageUrl    String?
+  status      ProductStatus @default(AVAILABLE)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  soldAt      DateTime?
+
+  categoryId  String
+  category    Category      @relation(fields: [categoryId], references: [id])
+}
+
+model Settings {
+  id              String   @id @default(cuid())
+  showSoldPublic  Boolean  @default(false)
+  trackStock      Boolean  @default(false)
+  updatedAt       DateTime @updatedAt
+}
