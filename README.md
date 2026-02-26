@@ -1,105 +1,123 @@
-# GGStore (Next.js + Prisma + PostgreSQL) - Custom Paca Shop
+# GGStore (Next.js + Prisma + PostgreSQL)
 
-Custom (100% tuyo) catálogo minimalista de prendas de paca:
-- Catálogo público con filtros
-- Carrito -> WhatsApp (sin pago en línea)
-- Admin con login (email + password) y sesión por cookie
-- CRUD productos / categorías
-- Marcar producto como VENDIDO (solo inventario, sin datos de cliente)
-- Dashboard simple: disponibles/vendidos, ventas por mes (conteo), total vendido (Q)
+Tienda custom para prendas de paca: - Catálogo público con
+filtros - Carrito -\> WhatsApp (sin pago en línea) - Admin con login
+(email + password) y sesión por cookie - CRUD productos / categorías -
+Marcar producto como VENDIDO -
+Dashboard simple: disponibles/vendidos, ventas por mes (conteo), total
+vendido (Q)
+
+------------------------------------------------------------------------
 
 ## Stack
-- Next.js (App Router) + TypeScript
-- Prisma ORM
-- PostgreSQL
-- TailwindCSS
+
+-   Next.js (App Router) + TypeScript
+-   Prisma ORM
+-   PostgreSQL
+-   TailwindCSS
+-   Cloudinary (imágenes)
+
+------------------------------------------------------------------------
 
 ## Requisitos
-- Node.js v20+ (recomendado LTS actual)
-- Docker (para Postgres local)
+
+-   Node.js v20.19+ (recomendado)
+-   Docker (para Postgres local)
+
+------------------------------------------------------------------------
 
 ## Arranque local
-1) Copia variables:
-```bash
+
+1)  Copia variables:
+
+``` bash
 cp .env.example .env
 ```
 
-2) Levanta Postgres:
-```bash
+2)  Levanta Postgres:
+
+``` bash
 docker compose up -d
 ```
 
-3) Instala deps:
-```bash
+3)  Instala dependencias:
+
+``` bash
 npm install
 ```
 
-4) Migra y siembra:
-```bash
+4)  Migra y siembra:
+
+``` bash
 npx prisma migrate dev --name init
 npm run db:seed
 ```
 
-5) Corre:
-```bash
+5)  Corre el proyecto:
+
+``` bash
 npm run dev
 ```
 
-Abre:
-- http://localhost:3000 (catálogo)
-- http://localhost:3000/admin/login (admin)
+Abre: - http://localhost:3000 (catálogo) -
+http://localhost:3000/admin/login (admin)
+
+------------------------------------------------------------------------
 
 ## Credenciales admin (seed)
-Por defecto:
-- Email: admin@ggstore.local
-- Password: Admin123!
 
-Puedes cambiarlo en `.env` (ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD) y volver a correr `npm run db:seed`.
+Por defecto: - Email: admin@ggstore.local - Password: Admin123!
 
-## CSV/TSV import
-Soportamos 3 formatos (auto-detect):
-1) `data/products.tsv` (tab)
-2) `data/products.csv` (coma)
-3) `data/plantilla_productos.csv` (punto y coma `;`, normalmente en **Latin-1**)
+Cámbialo en `.env` (ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD) y vuelve a
+correr:
 
-Encabezados soportados (los de tu proyecto .NET):
-`Id,Nombre,Descripcion,Precio,Categoria,Marca,Talla,Color,EstadoPrenda,Estado,ImagenUrl,FechaCreacion,FechaVenta,Genero`
+``` bash
+npm run db:seed
+```
 
-Luego:
-```bash
+------------------------------------------------------------------------
+
+## Import (CSV/TSV)
+
+Puedes importar desde Admin (**Importar**) o por consola:
+
+``` bash
 npm run import:products
 ```
 
-Notas:
-- `Estado` = `Disponible` / `Vendido` (si viene Vendido se marca SOLD y se setea `soldAt`)
-- `FechaCreacion` y `FechaVenta` se intentan parsear (si no, se usa `now()`)
+Encabezados base soportados:
 
-## Imágenes (URLs)
-Por ahora guardamos `imageUrl` como URL.
-Si luego usas Cloudinary, pon el URL transformado (ej: f_auto,q_auto,w_1000,c_limit) en el mismo campo.
+Id,Nombre,Precio,Categoria,Marca,Talla,Color,EstadoPrenda,Genero
 
-## Notas de producción
-- En VPS barato: Docker + Nginx + SSL (Let's Encrypt)
-- Respaldo DB: `pg_dump` diario + snapshot semanal
+Notas: - Si `Estado` viene como `Vendido`, se marca SOLD y se setea
+`soldAt = now()` para el dashboard. - `FechaCreacion` y `FechaVenta` no
+son requeridas.
 
+------------------------------------------------------------------------
 
-### Estado de inventario
-- AVAILABLE = Disponible
-- RESERVED = Reservado (nunca se muestra públicamente)
-- SOLD = Vendido
+## Imágenes (Cloudinary)
 
+La app guarda en BD solo el `public_id`, por ejemplo: `P_22`.
 
-## Importar productos (Admin)
-En Admin existe la pantalla **Importar** para subir CSV/TSV sin usar consola.
-- Modo **Skip**: no inserta si ya existe el Id (externalId)
-- Modo **Upsert**: actualiza si ya existe el Id
+Se construye la URL usando: - Cloud: dk7aiheee - Folder: ggstore
 
-## Carrito (prenda única)
-El carrito no permite cantidades > 1 por producto.
+------------------------------------------------------------------------
 
+## Producción (opción barata recomendada)
 
-## UI (v7)
-Esta versión usa `lucide-react` para íconos y `framer-motion` para animaciones.
+Hosting: Vercel\
+Base de datos: Neon (Postgres)\
+Imágenes: Cloudinary
 
-## Prisma
-Por compatibilidad, fijamos Prisma en 6.19.2 (Node 20.19+).
+Variables necesarias en Vercel:
+
+-   DATABASE_URL (Neon)
+-   CLOUDINARY_CLOUD_NAME=dk7aiheee
+-   CLOUDINARY_FOLDER=ggstore
+-   WHATSAPP_NUMBER=...
+-   ADMIN_SEED_EMAIL
+-   ADMIN_SEED_PASSWORD (usar password fuerte)
+
+------------------------------------------------------------------------
+
+Proyecto listo para escalar cuando quieras integrar pagos en línea.
