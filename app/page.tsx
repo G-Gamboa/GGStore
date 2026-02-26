@@ -60,6 +60,28 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
     }),
   ]);
 
+
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+const clamp = (n: number, a: number, b: number) => Math.max(a, Math.min(b, n));
+
+const getPageWindow = () => {
+  const windowSize = 5; // 1 2 3 4 5
+  const half = Math.floor(windowSize / 2);
+
+  let start = clamp(page - half, 1, Math.max(1, totalPages - windowSize + 1));
+  let end = clamp(start + windowSize - 1, 1, totalPages);
+
+  // re-ajuste si nos quedamos cortos
+  start = clamp(end - windowSize + 1, 1, totalPages);
+
+  const pages: number[] = [];
+  for (let p = start; p <= end; p++) pages.push(p);
+  return pages;
+};
+
+const pages = getPageWindow();
+
 const hasMore = skip + products.length < total;
 
   // Build filter options from current dataset (simple approach)
@@ -245,17 +267,39 @@ const hasMore = skip + products.length < total;
         </div>
         {/* Grid animado */}
         <ProductGrid products={products} showStatus={showSold} />
-        <div className="pt-2 flex items-center justify-center">
-  {hasMore ? (
+        <div className="pt-4 flex items-center justify-center gap-2 flex-wrap">
+  {/* Prev */}
+  <Link
+    href={buildPageHref(Math.max(1, page - 1))}
+    aria-disabled={page === 1}
+    className={`gg-button gg-button-ghost ${page === 1 ? "pointer-events-none opacity-50" : ""}`}
+  >
+    ←
+  </Link>
+
+  {/* Pages */}
+  {pages.map((p) => (
     <Link
-      href={buildPageHref(page + 1)}
-      className="gg-button gg-button-primary inline-flex items-center gap-2"
+      key={p}
+      href={buildPageHref(p)}
+      className={`gg-button ${p === page ? "gg-button-primary" : "gg-button-ghost"}`}
     >
-      Cargar más
+      {p}
     </Link>
-  ) : (
-    <div className="text-sm text-neutral-600">No hay más productos.</div>
-  )}
+  ))}
+
+  {/* Next */}
+  <Link
+    href={buildPageHref(Math.min(totalPages, page + 1))}
+    aria-disabled={page === totalPages}
+    className={`gg-button gg-button-ghost ${page === totalPages ? "pointer-events-none opacity-50" : ""}`}
+  >
+    →
+  </Link>
+</div>
+
+<div className="pt-2 text-center text-sm text-neutral-600">
+  Página {page} de {totalPages} · {total} productos
 </div>
       </section>
     )}
