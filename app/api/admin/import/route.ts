@@ -13,6 +13,8 @@ type Row = {
   Marca?: string;
   Talla?: string;
   Color?: string;
+  Genero?: string;
+  "Género"?: string;
   EstadoPrenda?: string;
   Estado?: string;         // Disponible / Vendido / Reservado  Genero?: string;
 };
@@ -127,7 +129,7 @@ export async function POST(req: NextRequest) {
               size: norm(r.Talla),
               color: norm(r.Color),
               condition: condition ?? null,
-              gender: norm(r.Genero),
+              gender: norm(r.Genero ?? r["Género"]),
               imageUrl,
               description: norm(r.Descripcion),
               status: isSold ? "SOLD" : (isReserved ? "RESERVED" : "AVAILABLE"),              soldAt,
@@ -149,7 +151,7 @@ export async function POST(req: NextRequest) {
           size: norm(r.Talla),
           color: norm(r.Color),
           condition: condition ?? null,
-          gender: norm(r.Genero),
+          gender: norm(r.Genero ?? r["Género"]),
           imageUrl,
           description: norm(r.Descripcion),
           status: isSold ? "SOLD" : (isReserved ? "RESERVED" : "AVAILABLE"),

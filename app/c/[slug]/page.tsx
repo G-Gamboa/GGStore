@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import ProductGrid from "@/components/product-grid";
 import { PillLink } from "@/components/ui";
+export const dynamic = "force-dynamic";
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -33,8 +34,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </div>
         <PillLink href="/categorias">Volver a categorías</PillLink>
       </div>
-
-      {/* @ts-expect-error Server to Client props */}
+      
       <ProductGrid products={products} showStatus={showSold} />
     </div>
   );

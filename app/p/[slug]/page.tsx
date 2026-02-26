@@ -6,6 +6,7 @@ import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
 import { PillLink } from "@/components/ui";
 import { Tag, Ruler, Palette, Shirt } from "lucide-react";
+export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

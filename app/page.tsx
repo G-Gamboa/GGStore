@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Input, Select, Button } from "@/components/ui";
 import ProductGrid from "@/components/product-grid";
+export const dynamic = "force-dynamic";
 
 type SP = { [k: string]: string | string[] | undefined };
 
@@ -216,7 +217,6 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
           <div className="text-sm text-neutral-600">Orden: más recientes</div>
         </div>
         {/* Grid animado */}
-        {/* @ts-expect-error Server to Client props */}
         <ProductGrid products={products} showStatus={showSold} />
       </section>
     )}
