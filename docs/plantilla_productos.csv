@@ -1,0 +1,142 @@
+Id;Nombre;Descripcion;Precio;Categoria;Marca;Talla;Color;EstadoPrenda;Estado;ImagenUrl;Genero
+4;Calcetines Altos;Calcetines Altos;160;Calcetines;Calvin Klein;M;Blanco;10;Disponible;P_4;Unisex
+5;Calcetines Altos;Calcetines Altos;160;Calcetines;Calvin Klein;M;Blanco;10;Disponible;P_5;Unisex
+6;Calcetines Altos;Calcetines Altos;160;Calcetines;Adidas;M;Blanco;10;Disponible;P_6;Unisex
+7;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Tommy;M;Blanco;10;Disponible;P_7;Unisex
+8;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Nautica;M;Blanco;10;Disponible;P_8;Unisex
+9;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Champion;M;Negro;10;Disponible;P_9;Unisex
+10;Chumpa;Chumpa;250;Chumpas;Lululemon;M;Blanco;10;Disponible;P_10;Mujer
+11;Pantaloneta;Pantaloneta;70;Pantalonetas;All in Motion;M;Verde;10;Disponible;P_11;Mujer
+12;Pantaloneta;Pantaloneta;70;Pantalonetas;Layers;M;Gris;10;Disponible;P_12;Mujer
+13;Falda;Falda;80;Faldas;Te Verde;M;Verde;10;Disponible;P_13;Mujer
+14;Licra;Licra;50;Licras;Americano;L;Celeste;8;Disponible;P_14;Mujer
+15;Licra;Licra;50;Licras;Alala;L;Negro;8;Disponible;P_15;Mujer
+16;Licra;Licra;50;Licras;Stoic;L;Gris;8;Disponible;P_16;Mujer
+17;Licra;Licra;50;Licras;Under Armour;L;Negro;9;Disponible;P_17;Mujer
+18;Licra;Licra;50;Licras;Mondetta;L;Beige;8;Disponible;P_18;Mujer
+19;Pescador;Pescador;20;Pescadores;Danskin;XL;Negro;8;Disponible;P_19;Mujer
+20;Pescador;Pescador;65;Pescadores;Time and Tru;L;Azul;10;Disponible;P_20;Mujer
+21;Pescador;Pescador;55;Pescadores;RBX;L;Azul;9;Disponible;P_21;Mujer
+22;Licra;Licra;80;Licras;RBX;L;Azul;10;Disponible;P_22;Mujer
+23;Licra;Licra;70;Licras;Athleta;L;Azul;10;Disponible;P_23;Mujer
+24;Licra;Licra;70;Licras;CRZ Yoga;L;Azul;10;Disponible;P_24;Mujer
+25;Licra;Licra;50;Licras;Old Navy;M;Negro;8;Disponible;P_25;Mujer
+26;Licra;Licra;90;Licras;Avia;M;Negro;10;Disponible;P_26;Mujer
+27;Licra;Licra;60;Licras;SAEG;ML;Negro;8;Disponible;P_27;Mujer
+28;Licra;Licra;90;Licras;RBX;M;Negro;10;Disponible;P_28;Mujer
+29;Licra;Licra;90;Licras;Avia;M;Negro;10;Disponible;P_29;Mujer
+30;Licra;Licra;110;Licras;Apana;M;Corinto;10;Disponible;P_30;Mujer
+31;Licra;Licra;110;Licras;90 Degree;M;Negro;10;Disponible;P_31;Mujer
+32;Licra;Licra;90;Licras;Simply Vera;M;Morado;10;Disponible;P_32;Mujer
+33;Licra;Licra;80;Licras;Forever 21;M;Gris;10;Disponible;P_33;Mujer
+34;Licra;Licra;90;Licras;Old Navy;M;Verde;10;Disponible;P_34;Mujer
+35;Licra;Licra;110;Licras;Old Navy;M;Azul;10;Disponible;P_35;Mujer
+36;Licra;Licra;100;Licras;Old Navy;M;Negro;10;Disponible;P_36;Mujer
+37;Licra;Licra;90;Licras;Pink;M;Negro;10;Disponible;P_37;Mujer
+38;Licra;Licra;70;Licras;Americano;M;Negro;10;Disponible;P_38;Mujer
+39;Licra;Licra;80;Licras;Avia;M;Negro;10;Disponible;P_39;Mujer
+40;Pantaloneta;Pantaloneta;60;Pantalonetas;GAP;M;Celeste;10;Disponible;P_40;Mujer
+41;Pantaloneta;Pantaloneta;20;Pantalonetas;Adidas;XL;Azul;8;Disponible;P_41;Mujer
+42;Pantaloneta;Pantaloneta;20;Pantalonetas;Reebok;XL;Negro;9;Disponible;P_42;Mujer
+43;Pantaloneta;Pantaloneta;35;Pantalonetas;Old Navy;L;Negro;9;Disponible;P_43;Mujer
+44;Pantaloneta;Pantaloneta;30;Pantalonetas;Danskin;ML;Negro;9;Disponible;P_44;Mujer
+45;Pantaloneta;Pantaloneta;25;Pantalonetas;Americano;ML;Verde;9;Disponible;P_45;Mujer
+46;Pantaloneta;Pantaloneta;40;Pantalonetas;Avia;L;Naranja;10;Disponible;P_46;Mujer
+47;Licra;Licra;40;Licras;Land´s End;L;Azul;10;Disponible;P_47;Mujer
+48;Licra;Licra;55;Licras;Americano;XL;Rojo;10;Disponible;P_48;Mujer
+49;Licra;Licra;50;Licras;Uniqlo;XL;Negro;10;Disponible;P_49;Mujer
+50;Licra;Licra;60;Licras;Old Navy;L;Diseño;10;Disponible;P_50;Mujer
+51;Licra;Licra;70;Licras;Champion;S;Negro;10;Disponible;P_51;Mujer
+52;Licra;Licra;50;Licras;Old Navy;XL;Negro;10;Disponible;P_52;Mujer
+53;Licra;Licra;50;Licras;RBX;XL;Negro;10;Disponible;P_53;Mujer
+54;Licra;Licra;30;Licras;PowerHold;XL;Negro;9;Disponible;P_54;Mujer
+55;Sueter;Sueter;70;Suéteres;Nike;M;Negro;9;Disponible;P_55;Unisex
+56;Sueter;Sueter;50;Suéteres;Tek Gear;XL;Negro;10;Disponible;P_56;Unisex
+57;Sueter;Sueter;30;Suéteres;Adidas;XL;Negro;10;Disponible;P_57;Mujer
+58;Sueter;Sueter;30;Suéteres;Champion;M;Corinto;10;Disponible;P_58;Mujer
+59;Pants;Pants;40;Pantalones ;Americano;L;Gris;10;Disponible;P_59;Hombre
+60;Licra;Licra;50;Licras;Americano;S;Azul;10;Disponible;P_60;Hombre
+61;Vestido Deportivo;Vestido Deportivo;100;Vestidos;MPG;M;Gris;10;Disponible;P_61;Mujer
+62;Pants;Pants;20;Pantalones ;Americano;L;Azul;10;Disponible;P_62;Unisex
+63;Camiseta;Camiseta;40;Blusas;Old Navy;S;Celeste;10;Disponible;P_63;Mujer
+64;Camiseta;Camiseta;40;Blusas;GAP;S;Gris;10;Disponible;P_64;Mujer
+65;Blusa Deportiva;Blusa Deportiva;40;Blusas;Atletic;S;Verde;10;Disponible;P_65;Mujer
+66;Camiseta;Camiseta;40;Blusas;Americano;S;Gris;10;Disponible;P_66;Mujer
+67;Blusa Deportiva;Blusa Deportiva;20;Blusas;Zelos;XL;Gris;10;Disponible;P_67;Mujer
+68;Camiseta;Camiseta;30;Blusas;Americano;L;Gris;10;Disponible;P_68;Mujer
+69;Blusa Deportiva;Blusa Deportiva;25;Blusas;Reebok;XL;Gris;10;Disponible;P_69;Mujer
+70;Camiseta;Camiseta;20;Blusas;Licious;XL;Verde;10;Disponible;P_70;Mujer
+71;Camiseta;Camiseta;20;Blusas;Americano;XL;Verde;10;Disponible;P_71;Mujer
+72;Blusa Deportiva;Blusa Deportiva;25;Blusas;Tek Gear;L;Celeste;10;Disponible;P_72;Mujer
+73;Blusa Deportiva;Blusa Deportiva;25;Blusas;Tek Gear;L;Morado;10;Disponible;P_73;Mujer
+74;Blusa Deportiva;Blusa Deportiva;25;Blusas;POLO;L;Dorado;10;Disponible;P_74;Mujer
+75;Blusa Deportiva;Blusa Deportiva;25;Blusas;Americano;L;Rosado;10;Disponible;P_75;Mujer
+76;Blusa Deportiva;Blusa Deportiva;15;Blusas;Americano;XL;Gris;10;Disponible;P_76;Mujer
+77;Camiseta;Camiseta;20;Blusas;Tek Gear;L;Gris;10;Disponible;P_77;Mujer
+78;Camiseta;Camiseta;20;Blusas;Americano;L;Gris;10;Disponible;P_78;Mujer
+79;Camiseta;Camiseta;30;Blusas;Under Armour;M;Gris;10;Disponible;P_79;Mujer
+80;Camiseta;Camiseta;30;Blusas;Champion;M;Rosado;10;Disponible;P_80;Mujer
+81;Playera;Playera;50;Playeras;Nike;M;Negro;10;Disponible;P_81;Unisex
+82;Blusa Deportiva;Blusa Deportiva;30;Blusas;Under Armour;SM;Morado;9;Disponible;P_82;Mujer
+83;Camiseta;Camiseta;30;Blusas;Americano;M;Naranja;10;Disponible;P_83;Mujer
+84;Camiseta;Camiseta;40;Blusas;IcyZone;M;Azul;10;Disponible;P_84;Mujer
+85;Camiseta;Camiseta;25;Blusas;LoveSport;M;Blanco;8;Disponible;P_85;Mujer
+86;Camiseta;Camiseta;30;Blusas;ProPlayer;M;Diseño;10;Disponible;P_86;Mujer
+87;Camiseta;Camiseta;40;Blusas;All in Motion;M;Negro;10;Disponible;P_87;Mujer
+88;Sueter;Sueter;80;Suéteres;Under Armour;M;Verde;10;Disponible;P_88;Mujer
+89;Camiseta;Camiseta;60;Blusas;Old Navy;M;Negro;10;Disponible;P_89;Mujer
+90;Licra;Licra;80;Licras;Jockey;S;Negro;10;Disponible;P_90;Mujer
+91;Licra;Licra;70;Licras;PowerHold;S;Verde;10;Disponible;P_91;Mujer
+92;Licra;Licra;70;Licras;EMS;S;Azul;10;Disponible;P_92;Hombre
+93;Licra;Licra;50;Licras;FILA;S;Gris;7;Disponible;P_93;Mujer
+94;Licra;Licra;50;Licras;SHEIN;S;Negro;10;Disponible;P_94;Mujer
+95;Licra;Licra;60;Licras;Ohidrolix;S;Negro;10;Disponible;P_95;Mujer
+96;Pantaloneta;Pantaloneta;50;Pantalonetas;Americano;M;Negro;10;Disponible;P_96;Mujer
+97;Pantaloneta;Pantaloneta;50;Pantalonetas;Americano;S;Negro;10;Disponible;P_97;Mujer
+98;Licra;Licra;75;Licras;Americano;S;Diseño;10;Disponible;P_98;Mujer
+99;Licra;Licra;80;Licras;Old Navy;M;Verde;10;Disponible;P_99;Mujer
+100;Licra;Licra;120;Licras;Lululemon;S;Verde;10;Disponible;P_100;Mujer
+101;Playera;Playera;50;Playeras;Zeroxpur;S;Gris;10;Disponible;P_101;Hombre
+102;Playera;Playera;15;Playeras;Americano;XL;Azul;10;Disponible;P_102;Hombre
+103;Playera;Playera;15;Playeras;Americano;XL;Café;10;Disponible;P_103;Hombre
+104;Playera;Playera;15;Playeras;Gildan;XL;Azul;10;Disponible;P_104;Hombre
+105;Playera;Playera;15;Playeras;Americano;XL;Naranja;9;Disponible;P_105;Hombre
+106;Playera;Playera;15;Playeras;Americano;XL;Gris;10;Disponible;P_106;Hombre
+107;Playera;Playera;15;Playeras;Gildan;XL;Negro;10;Disponible;P_107;Hombre
+108;Playera;Playera;15;Playeras;Gildan;XL;Rojo;10;Disponible;P_108;Hombre
+109;Playera;Playera;15;Playeras;Gildan;XL;Negro;10;Disponible;P_109;Hombre
+110;Playera;Playera;15;Playeras;Gildan;XL;Rojo;10;Disponible;P_110;Hombre
+111;Playera;Playera;15;Playeras;Americano;XL;Negro;10;Disponible;P_111;Hombre
+112;Playera;Playera;15;Playeras;Old Navy;XL;Gris;10;Disponible;P_112;Hombre
+113;Camisola USA;Camisola USA;10;Playeras;Nike;XL;Rojo;6;Disponible;P_113;Hombre
+114;Playera;Playera;10;Playeras;Americano;XL;Azul;6;Disponible;P_114;Hombre
+115;Playera;Playera;15;Playeras;Americano;XL;Corinto;9;Disponible;P_115;Hombre
+116;Playera;Playera;15;Playeras;Under Armour;XL;Corinto;10;Disponible;P_116;Hombre
+117;Playera;Playera;15;Playeras;Gildan;XL;Negro;10;Disponible;P_117;Hombre
+118;Playera;Playera;15;Playeras;Gildan;XL;Verde;10;Disponible;P_118;Hombre
+119;Playera;Playera;10;Playeras;Atletic;XL;Celeste;8;Disponible;P_119;Hombre
+120;Playera;Playera;15;Playeras;Americano;XL;Corinto;10;Disponible;P_120;Hombre
+121;Playera;Playera;15;Playeras;Americano;L;Verde;8;Disponible;P_121;Hombre
+122;Playera;Playera;25;Playeras;Americano;L;Negro;10;Disponible;P_122;Hombre
+123;Playera;Playera;20;Playeras;Gildan;L;Gris;10;Disponible;P_123;Hombre
+124;Playera;Playera;20;Playeras;Amazon;L;Rojo;10;Disponible;P_124;Hombre
+125;Playera;Playera;20;Playeras;Americano;L;Gris;10;Disponible;P_125;Hombre
+126;Playera;Playera;25;Playeras;FLX;L;Blanco;8;Disponible;P_126;Hombre
+127;Playera;Playera;30;Playeras;Gildan;L;Gris;10;Disponible;P_127;Hombre
+128;Playera;Playera;20;Playeras;Americano;L;Gris;9;Disponible;P_128;Hombre
+129;Playera;Playera;20;Playeras;Americano;L;Blanco;9;Disponible;P_129;Hombre
+130;Playera;Playera;20;Playeras;Americano;L;Azul;10;Disponible;P_130;Hombre
+131;Playera;Playera;20;Playeras;FLX;L;Rosado;10;Disponible;P_131;Hombre
+132;Playera;Playera;30;Playeras;Old Navy;L;Negro;10;Disponible;P_132;Hombre
+133;Playera;Playera;15;Playeras;Americano;L;Azul;8;Disponible;P_133;Hombre
+134;Playera;Playera;30;Playeras;Medium;L;Beige;10;Disponible;P_134;Hombre
+135;Playera;Playera;30;Playeras;H&M;L;Amarillo;10;Disponible;P_135;Hombre
+136;Playera;Playera;25;Playeras;Under Armour;M;Azul;10;Disponible;P_136;Hombre
+137;Playera;Playera;35;Playeras;H&M;S;Verde;10;Disponible;P_137;Hombre
+138;Playera;Playera;30;Playeras;Americano;L;Negro;10;Disponible;P_138;Hombre
+139;Playera;Playera;30;Playeras;Americano;L;Corinto;10;Disponible;P_139;Hombre
+140;Playera;Playera;20;Playeras;Atletic;L;Negro;9;Disponible;P_140;Hombre
+141;Playera;Playera;25;Playeras;Americano;L;Gris;10;Disponible;P_141;Hombre
+142;Playera;Playera;30;Playeras;Americano;L;Negro;10;Disponible;P_142;Hombre
+143;Playera;Playera;30;Playeras;FruitLoop;L;Azul;10;Disponible;P_143;Hombre
+144;Playera;Playera;25;Playeras;TeeLuv;L;Azul;10;Disponible;P_144;Hombre
