@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button, Input } from "@/components/ui";
 
@@ -38,8 +39,10 @@ export default function CategoriesClient() {
   }
 
   return (
+    
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Categorías</h1>
+                                <Link href="/admin" className="gg-button gg-button-ghost">← Admin</Link>
+                      <h1 className="text-2xl font-semibold">Categorías</h1>
       {msg ? <div className="rounded-xl border p-3 text-sm text-red-600">{msg}</div> : null}
 
       <div className="rounded-2xl border p-5 space-y-3 max-w-lg">

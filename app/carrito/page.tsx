@@ -56,7 +56,7 @@ export default function CartPage() {
     const head = baseMsg || "Hola, me interesa este pedido:";
     const lines = items.map((i, idx) => {
       const code = i.externalId ?? i.id;
-      return `${idx + 1}. ${i.name} (x${i.qty}) - Q${i.priceQ} c/u. Código: ${code}`;
+      return `${idx + 1}. ${i.name} (x${i.qty}) - Q${i.priceQ}. Código: ${code}`;
     });
     return `${head}\n\n${lines.join("\n")}\n\nTotal: Q${total}`;
   }, [items, total, baseMsg]);
@@ -86,9 +86,8 @@ export default function CartPage() {
                   />
                   <div>
                     <div className="font-semibold">{i.name}</div>
-                  <div className="text-sm text-neutral-600">Q{i.priceQ} c/u · Código: {i.externalId ?? "-"}</div>
+                  <div className="text-sm text-neutral-600">Q{i.priceQ} · Código: {i.externalId ?? "-"}</div>
                   <div className="mt-2 flex items-center gap-2 text-sm">
-                    <span>Cant: 1</span>
                     <button className="ml-2 text-sm underline" onClick={() => remove(i.id)}><Trash2 size={16} className="inline-block mr-1" />Quitar</button>
                   </div>
                   </div>
@@ -113,10 +112,6 @@ export default function CartPage() {
               Configura <code>WHATSAPP_NUMBER</code> en <code>.env</code>.
             </div>
           )}
-
-          <div className="text-xs text-neutral-600">
-            Nota: enviar a WhatsApp no cambia el inventario automáticamente. Marca vendido desde Admin cuando confirmes la venta.
-          </div>
         </>
       )}
     </div>

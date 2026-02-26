@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui";
+import Link from "next/link";
 
 export default function ImportClient() {
   const [file, setFile] = useState<File | null>(null);
@@ -31,6 +32,7 @@ export default function ImportClient() {
 
   return (
     <div className="space-y-6">
+      <Link href="/admin" className="gg-button gg-button-ghost">← Admin</Link>
       <h1 className="text-2xl font-semibold">Importar productos</h1>
 
       <div className="rounded-2xl border p-5 space-y-4 max-w-2xl">

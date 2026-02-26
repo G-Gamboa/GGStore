@@ -20,6 +20,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
   const page = Math.max(1, Number((sp.page as string) || "1"));
   const PAGE_SIZE = 24; 
   const skip = (page - 1) * PAGE_SIZE;
+  
+  const formKey = `${q}|${category}|${brand}|${size}|${color}|${gender}|${condition}|${min}|${max}|${page}`;
+
 
   const settings = await prisma.settings.findFirst();
   const showSold = settings?.showSoldPublic ?? false;
@@ -124,7 +127,7 @@ const hasMore = skip + products.length < total;
         <div>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[var(--gg-dark)]">Prendas únicas, seleccionadas cuidadosamente</h1>
           <p className="mt-2 text-[color:var(--gg-muted)] max-w-2xl">
-            Cada pieza es única. Agrega al carrito y envía tu pedido por WhatsApp.
+            Agrega al carrito y envía tu pedido por WhatsApp.
           </p>
         </div>
         <div className="gg-surface px-4 py-3 inline-flex items-center gap-3">
@@ -145,7 +148,7 @@ const hasMore = skip + products.length < total;
     </div>
   </div>
 
-  <form className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+  <form key={formKey} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
     <Input name="q" placeholder="Buscar por nombre" defaultValue={q} />
 
     <Select name="category" defaultValue={category}>

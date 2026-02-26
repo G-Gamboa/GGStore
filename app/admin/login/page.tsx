@@ -34,9 +34,6 @@ export default function AdminLogin() {
         {loading ? "Entrando..." : "Entrar"}
       </Button>
       {msg ? <div className="text-sm text-red-600">{msg}</div> : null}
-      <div className="text-xs text-neutral-600">
-        Tip: credenciales default en README (seed).
-      </div>
     </div>
   );
 }

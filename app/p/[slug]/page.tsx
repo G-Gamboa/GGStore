@@ -56,7 +56,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             <div>
               <h1 className="text-2xl md:text-3xl font-semibold">{p.name}</h1>
               <div className="mt-2 text-2xl font-semibold text-[var(--gg-dark)]">{formatQ(p.priceQ)}</div>
-              <div className="mt-1 text-sm text-neutral-600">Precio exacto en quetzales</div>
             </div>
 
             <div className="flex flex-wrap gap-2">

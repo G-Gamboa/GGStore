@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
+import Link from "next/link";
 
 function monthKey(d: Date) {
   const y = d.getFullYear();
@@ -34,6 +35,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
+                      <Link href="/admin" className="gg-button gg-button-ghost">← Admin</Link>
       <h1 className="text-2xl font-semibold">Dashboard</h1>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">

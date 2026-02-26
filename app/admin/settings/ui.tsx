@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui";
+import Link from "next/link";
 
 export default function SettingsForm({ initial }: { initial: { showSoldPublic: boolean; trackStock: boolean } }) {
   const [showSoldPublic, setShowSoldPublic] = useState(initial.showSoldPublic);
