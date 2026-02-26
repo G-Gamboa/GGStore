@@ -10,8 +10,8 @@ async function main() {
   if (!s) await prisma.settings.create({ data: { showSoldPublic: false, trackStock: false } });
 
   // admin user
-  const email = (process.env.ADMIN_SEED_EMAIL || "admin@ggstore.local").toLowerCase().trim();
-  const password = process.env.ADMIN_SEED_PASSWORD || "Admin123!";
+  const email = (process.env.ADMIN_SEED_EMAIL || "gamboaguillermo16@gmail.com").toLowerCase().trim();
+  const password = process.env.ADMIN_SEED_PASSWORD || "G@mboa01";
   const existing = await prisma.user.findUnique({ where: { email } });
   if (!existing) {
     const passwordHash = await bcrypt.hash(password, 12);
