@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+
+
+:root {
+  --gg-primary: #C0FABE;
+  --gg-secondary: #DEFABE;
+  --gg-accent: #BEFADA;
+  --gg-dark: #1f3d2b;
+}
+
+
+.gg-card {
+  background: white;
+  border: 1px solid #e6f5eb;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.gg-button {
+  background: var(--gg-primary);
+  color: var(--gg-dark);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.gg-button:hover {
+  background: var(--gg-accent);
+  transform: translateY(-1px);
+}
+
+.gg-badge {
+  background: var(--gg-accent);
+  color: var(--gg-dark);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+
+.status-available {
+  background:#C0FABE;
+  color:#1f3d2b;
+}
+
+.status-reserved {
+  background:#FFF5C2;
+  color:#7a5f00;
+}
+
+.status-sold {
+  background:#E5E7EB;
+  color:#374151;
+}
+
+
+:root {
+  --gg-primary: #C0FABE;
+  --gg-secondary: #DEFABE;
+  --gg-accent: #BEFADA;
+  --gg-dark: #1f3d2b;
+  --gg-bg: #f6fbf7;
+  --gg-border: #e1f1e6;
+  --gg-muted: #5b6b60;
+}
+
+body {
+  background: var(--gg-bg);
+  color: #0a0f0c;
+}
+
+.gg-surface {
+  background: #ffffff;
+  border: 1px solid var(--gg-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+}
+
+.gg-section {
+  background: var(--gg-secondary);
+  border: 1px solid var(--gg-border);
+  border-radius: 26px;
+}
+
+.gg-chip {
+  background: #ffffff;
+  border: 1px solid var(--gg-border);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--gg-muted);
+}
+
+.gg-badge {
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.gg-badge-available { background: var(--gg-primary); color: var(--gg-dark); }
+.gg-badge-reserved { background: #fff5c2; color: #7a5f00; }
+.gg-badge-sold { background: #e5e7eb; color: #374151; }
+
+.gg-input {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--gg-border);
+  background: #ffffff;
+  padding: 0.6rem 0.8rem;
+}
+
+.gg-select {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--gg-border);
+  background: #ffffff;
+  padding: 0.6rem 0.8rem;
+}
+
+.gg-button {
+  border-radius: 14px;
+  padding: 0.65rem 0.95rem;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.gg-button-primary {
+  background: var(--gg-primary);
+  color: var(--gg-dark);
+}
+
+.gg-button-primary:hover {
+  background: var(--gg-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.06);
+}
+
+.gg-button-ghost {
+  background: #ffffff;
+  color: #111827;
+}
+
+.gg-button-ghost:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.gg-nav {
+  background: #ffffff;
+  border-bottom: 1px solid var(--gg-border);
+}
+
+.gg-nav-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+
+}
+
+.gg-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.gg-navlinks {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.gg-link {
+  font-size: 0.9rem;
+  color: #111827;
+  position: relative;
+  padding: 0.35rem 0.55rem;
+  border-radius: 12px;
+}
+
+.gg-link:hover {
+  background: rgba(192,250,190,0.35);
+}
