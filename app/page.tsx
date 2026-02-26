@@ -17,6 +17,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
   const condition = (sp.condition as string) || "";
   const min = (sp.min as string) || "";
   const max = (sp.max as string) || "";
+  const page = Math.max(1, Number((sp.page as string) || "1"));
+  const PAGE_SIZE = 24; 
+  const skip = (page - 1) * PAGE_SIZE;
 
   const settings = await prisma.settings.findFirst();
   const showSold = settings?.showSoldPublic ?? false;
@@ -46,12 +49,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
     if (max) where.priceQ.lte = Number(max);
   }
 
-  const products = await prisma.product.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
-    take: 120,
-    include: { category: true },
-  });
+  const [total, products] = await Promise.all([
+    prisma.product.count({ where }),
+    prisma.product.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: PAGE_SIZE,
+      include: { category: true },
+    }),
+  ]);
+
+const hasMore = skip + products.length < total;
 
   // Build filter options from current dataset (simple approach)
   const opts = await prisma.product.findMany({
@@ -68,6 +77,24 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
   const genders = uniq(opts.map(o=>o.gender));
   const conditions = uniqNum(opts.map(o=>o.condition));
 
+
+  const buildPageHref = (nextPage: number) => {
+  const params = new URLSearchParams();
+
+  if (q) params.set("q", q);
+  if (category) params.set("category", category);
+  if (brand) params.set("brand", brand);
+  if (size) params.set("size", size);
+  if (color) params.set("color", color);
+  if (gender) params.set("gender", gender);
+  if (condition) params.set("condition", condition);
+  if (min) params.set("min", min);
+  if (max) params.set("max", max);
+
+  params.set("page", String(nextPage));
+  return `/?${params.toString()}`;
+};
+
   return (
   <div className="space-y-8">
     <section className="gg-section p-8 md:p-10">
@@ -80,7 +107,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
         </div>
         <div className="gg-surface px-4 py-3 inline-flex items-center gap-3">
           <div className="text-sm text-neutral-600">Productos:</div>
-          <div className="text-lg font-semibold">{products.length}</div>
+          <div className="text-lg font-semibold">{total}</div>
         </div>
       </div>
     </section>
@@ -218,6 +245,18 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
         </div>
         {/* Grid animado */}
         <ProductGrid products={products} showStatus={showSold} />
+        <div className="pt-2 flex items-center justify-center">
+  {hasMore ? (
+    <Link
+      href={buildPageHref(page + 1)}
+      className="gg-button gg-button-primary inline-flex items-center gap-2"
+    >
+      Cargar más
+    </Link>
+  ) : (
+    <div className="text-sm text-neutral-600">No hay más productos.</div>
+  )}
+</div>
       </section>
     )}
   </div>
