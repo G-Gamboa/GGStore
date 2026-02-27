@@ -1,8 +1,9 @@
 "use client";
 
 import { ShoppingBag } from "lucide-react";
-
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useCart } from "@/components/cart-store";
 
 type CartItem = {
   id: string;
@@ -16,27 +17,20 @@ type CartItem = {
 
 export default function AddToCart({ product }: { product: Omit<CartItem, "qty"> }) {
   const [added, setAdded] = useState(false);
-
-  function read(): CartItem[] {
-    try { return JSON.parse(localStorage.getItem("CART") || "[]"); } catch { return []; }
-  }
-
-  function write(items: CartItem[]) {
-    localStorage.setItem("CART", JSON.stringify(items));
-  }
+  const router = useRouter();
+  const { add: addToCart } = useCart();
 
   function add() {
-    const items = read();
-    const idx = items.findIndex(i => i.id === product.id);
-    if (idx >= 0) {
-      // Cada prenda es única: no permitimos cantidades > 1
-      items[idx].qty = 1;
-    } else {
-      items.push({ ...product, qty: 1 });
-    }
-    write(items);
+    addToCart(product);
+
     setAdded(true);
     setTimeout(() => setAdded(false), 1200);
+    
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/");
+    }
   }
 
   return (

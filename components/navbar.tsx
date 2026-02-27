@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Leaf, LayoutGrid, ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/components/cart-store";
+
 
 const links = [
   { href: "/categorias", label: "Categorías", icon: LayoutGrid },
@@ -14,28 +16,41 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
 
-  function NavLink({ href, label, Icon, onClick }: any) {
-    const active = pathname === href || (href !== "/" && pathname?.startsWith(href));
-    return (
-      <Link
-        href={href}
-        onClick={onClick}
-        className="gg-link relative inline-flex items-center gap-2"
-      >
+function NavLink({ href, label, Icon, onClick }: any) {
+  const active = pathname === href || (href !== "/" && pathname?.startsWith(href));
+  const isCart = href === "/carrito";
+
+  return (
+    <Link
+      href={href}
+      onClick={onClick}
+      className="gg-link relative inline-flex items-center gap-2"
+    >
+      <span className="relative inline-flex">
         <Icon size={16} className={active ? "text-[var(--gg-dark)]" : "text-neutral-600"} />
-        <span className={active ? "font-semibold" : ""}>{label}</span>
-        {active ? (
-          <motion.span
-            layoutId="nav-pill"
-            className="absolute inset-0 -z-10 rounded-xl"
-            style={{ background: "rgba(192,250,190,0.55)" }}
-            transition={{ type: "spring", stiffness: 500, damping: 35 }}
-          />
+
+        {isCart && count > 0 ? (
+          <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--gg-dark)] text-white text-[11px] leading-[18px] text-center">
+            {count}
+          </span>
         ) : null}
-      </Link>
-    );
-  }
+      </span>
+
+      <span className={active ? "font-semibold" : ""}>{label}</span>
+
+      {active ? (
+        <motion.span
+          layoutId="nav-pill"
+          className="absolute inset-0 -z-10 rounded-xl"
+          style={{ background: "rgba(192,250,190,0.55)" }}
+          transition={{ type: "spring", stiffness: 500, damping: 35 }}
+        />
+      ) : null}
+    </Link>
+  );
+}
 
   return (
     <header className="gg-nav sticky top-0 z-50">

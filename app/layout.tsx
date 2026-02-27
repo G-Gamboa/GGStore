@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
+import { CartProvider } from "@/components/cart-store";
 
 export const metadata = {
   title: "GGStore",
@@ -17,9 +18,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
+
       <body style={{ fontFamily: "Inter, system-ui, sans-serif" }} className="min-h-screen">
-        <Navbar />
-        <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
+        <CartProvider>
+          <Navbar />
+          <main className="mx-auto max-w-6xl px-4 py-10">
+            {children}
+          </main>
+        </CartProvider>
       </body>
     </html>
   );

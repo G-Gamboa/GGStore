@@ -89,7 +89,6 @@ export default function ProductCard({ p, showStatus }: { p: Product; showStatus:
 
             <div className="shrink-0 text-right">
               <div className="text-base font-semibold text-[var(--gg-dark)]">{formatQ(p.priceQ)}</div>
-              <div className="text-[11px] text-neutral-500 leading-tight">Q exactos</div>
             </div>
           </div>
 
