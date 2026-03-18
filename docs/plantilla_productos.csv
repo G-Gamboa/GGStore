@@ -1,44 +1,44 @@
 Id;Nombre;Descripcion;Precio;Categoria;Marca;Talla;Color;EstadoPrenda;Estado;ImagenUrl;Genero
 4;Calcetines Altos;Calcetines Altos;160;Calcetines;Calvin Klein;M;Blanco;10;Disponible;P_4;Unisex
-5;Calcetines Altos;Calcetines Altos;160;Calcetines;Calvin Klein;M;Blanco;10;Disponible;P_5;Unisex
+5;Calcetines Altos;Calcetines Altos;160;Calcetines;Calvin Klein;M;Blanco;10;Vendido;P_5;Unisex
 6;Calcetines Altos;Calcetines Altos;160;Calcetines;Adidas;M;Blanco;10;Disponible;P_6;Unisex
-7;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Tommy;M;Blanco;10;Disponible;P_7;Unisex
+7;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Tommy;M;Blanco;10;Vendido;P_7;Unisex
 8;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Nautica;M;Blanco;10;Disponible;P_8;Unisex
 9;Calcetines Bajos;Calcetines Bajos;150;Calcetines;Champion;M;Negro;10;Disponible;P_9;Unisex
-10;Chumpa;Chumpa;250;Chumpas;Lululemon;M;Blanco;10;Disponible;P_10;Mujer
-11;Pantaloneta;Pantaloneta;70;Pantalonetas;All in Motion;M;Verde;10;Disponible;P_11;Mujer
-12;Pantaloneta;Pantaloneta;70;Pantalonetas;Layers;M;Gris;10;Disponible;P_12;Mujer
-13;Falda;Falda;80;Faldas;Te Verde;M;Verde;10;Disponible;P_13;Mujer
-14;Licra;Licra;50;Licras;Americano;L;Celeste;8;Disponible;P_14;Mujer
-15;Licra;Licra;50;Licras;Alala;L;Negro;8;Disponible;P_15;Mujer
-16;Licra;Licra;50;Licras;Stoic;L;Gris;8;Disponible;P_16;Mujer
-17;Licra;Licra;50;Licras;Under Armour;L;Negro;9;Disponible;P_17;Mujer
-18;Licra;Licra;50;Licras;Mondetta;L;Beige;8;Disponible;P_18;Mujer
+10;Chumpa;Chumpa;200;Chumpas;Lululemon;M;Blanco;10;Disponible;P_10;Mujer
+11;Pantaloneta;Pantaloneta;50;Pantalonetas;All in Motion;M;Verde;10;Disponible;P_11;Mujer
+12;Pantaloneta;Pantaloneta;50;Pantalonetas;Layers;M;Gris;10;Disponible;P_12;Mujer
+13;Falda;Falda;60;Faldas;Te Verde;M;Verde;10;Disponible;P_13;Mujer
+14;Licra;Licra;40;Licras;Americano;L;Celeste;8;Disponible;P_14;Mujer
+15;Licra;Licra;40;Licras;Alala;L;Negro;8;Disponible;P_15;Mujer
+16;Licra;Licra;40;Licras;Stoic;L;Gris;8;Disponible;P_16;Mujer
+17;Licra;Licra;30;Licras;Under Armour;L;Negro;9;Disponible;P_17;Mujer
+18;Licra;Licra;40;Licras;Mondetta;L;Beige;8;Disponible;P_18;Mujer
 19;Pescador;Pescador;20;Pescadores;Danskin;XL;Negro;8;Disponible;P_19;Mujer
-20;Pescador;Pescador;65;Pescadores;Time and Tru;L;Azul;10;Disponible;P_20;Mujer
-21;Pescador;Pescador;55;Pescadores;RBX;L;Azul;9;Disponible;P_21;Mujer
-22;Licra;Licra;80;Licras;RBX;L;Azul;10;Disponible;P_22;Mujer
+20;Pescador;Pescador;60;Pescadores;Time and Tru;L;Azul;10;Disponible;P_20;Mujer
+21;Pescador;Pescador;50;Pescadores;RBX;L;Azul;9;Disponible;P_21;Mujer
+22;Licra;Licra;70;Licras;RBX;L;Azul;10;Disponible;P_22;Mujer
 23;Licra;Licra;70;Licras;Athleta;L;Azul;10;Disponible;P_23;Mujer
 24;Licra;Licra;70;Licras;CRZ Yoga;L;Azul;10;Disponible;P_24;Mujer
 25;Licra;Licra;50;Licras;Old Navy;M;Negro;8;Disponible;P_25;Mujer
-26;Licra;Licra;90;Licras;Avia;M;Negro;10;Disponible;P_26;Mujer
+26;Licra;Licra;80;Licras;Avia;M;Negro;10;Disponible;P_26;Mujer
 27;Licra;Licra;60;Licras;SAEG;ML;Negro;8;Disponible;P_27;Mujer
-28;Licra;Licra;90;Licras;RBX;M;Negro;10;Disponible;P_28;Mujer
-29;Licra;Licra;90;Licras;Avia;M;Negro;10;Disponible;P_29;Mujer
-30;Licra;Licra;110;Licras;Apana;M;Corinto;10;Disponible;P_30;Mujer
-31;Licra;Licra;110;Licras;90 Degree;M;Negro;10;Disponible;P_31;Mujer
+28;Licra;Licra;80;Licras;RBX;M;Negro;10;Disponible;P_28;Mujer
+29;Licra;Licra;70;Licras;Avia;M;Negro;10;Disponible;P_29;Mujer
+30;Licra;Licra;100;Licras;Apana;M;Corinto;10;Disponible;P_30;Mujer
+31;Licra;Licra;100;Licras;90 Degree;M;Negro;10;Disponible;P_31;Mujer
 32;Licra;Licra;90;Licras;Simply Vera;M;Morado;10;Disponible;P_32;Mujer
 33;Licra;Licra;80;Licras;Forever 21;M;Gris;10;Disponible;P_33;Mujer
-34;Licra;Licra;90;Licras;Old Navy;M;Verde;10;Disponible;P_34;Mujer
-35;Licra;Licra;110;Licras;Old Navy;M;Azul;10;Disponible;P_35;Mujer
+34;Licra;Licra;80;Licras;Old Navy;M;Verde;10;Disponible;P_34;Mujer
+35;Licra;Licra;100;Licras;Old Navy;M;Azul;10;Disponible;P_35;Mujer
 36;Licra;Licra;100;Licras;Old Navy;M;Negro;10;Disponible;P_36;Mujer
-37;Licra;Licra;90;Licras;Pink;M;Negro;10;Disponible;P_37;Mujer
-38;Licra;Licra;70;Licras;Americano;M;Negro;10;Disponible;P_38;Mujer
+37;Licra;Licra;80;Licras;Pink;M;Negro;10;Disponible;P_37;Mujer
+38;Licra;Licra;50;Licras;Americano;M;Negro;10;Disponible;P_38;Mujer
 39;Licra;Licra;80;Licras;Avia;M;Negro;10;Disponible;P_39;Mujer
 40;Pantaloneta;Pantaloneta;60;Pantalonetas;GAP;M;Celeste;10;Disponible;P_40;Mujer
 41;Pantaloneta;Pantaloneta;20;Pantalonetas;Adidas;XL;Azul;8;Disponible;P_41;Mujer
 42;Pantaloneta;Pantaloneta;20;Pantalonetas;Reebok;XL;Negro;9;Disponible;P_42;Mujer
-43;Pantaloneta;Pantaloneta;35;Pantalonetas;Old Navy;L;Negro;9;Disponible;P_43;Mujer
+43;Pantaloneta;Pantaloneta;30;Pantalonetas;Old Navy;L;Negro;9;Disponible;P_43;Mujer
 44;Pantaloneta;Pantaloneta;30;Pantalonetas;Danskin;ML;Negro;9;Disponible;P_44;Mujer
 45;Pantaloneta;Pantaloneta;25;Pantalonetas;Americano;ML;Verde;9;Disponible;P_45;Mujer
 46;Pantaloneta;Pantaloneta;40;Pantalonetas;Avia;L;Naranja;10;Disponible;P_46;Mujer
@@ -54,8 +54,8 @@ Id;Nombre;Descripcion;Precio;Categoria;Marca;Talla;Color;EstadoPrenda;Estado;Ima
 56;Sueter;Sueter;50;Suéteres;Tek Gear;XL;Negro;10;Disponible;P_56;Unisex
 57;Sueter;Sueter;30;Suéteres;Adidas;XL;Negro;10;Disponible;P_57;Mujer
 58;Sueter;Sueter;30;Suéteres;Champion;M;Corinto;10;Disponible;P_58;Mujer
-59;Pants;Pants;40;Pantalones ;Americano;L;Gris;10;Disponible;P_59;Hombre
-60;Licra;Licra;50;Licras;Americano;S;Azul;10;Disponible;P_60;Hombre
+59;Pants;Pants;30;Pantalones ;Americano;L;Gris;10;Disponible;P_59;Hombre
+60;Licra;Licra;40;Licras;Americano;S;Azul;10;Disponible;P_60;Hombre
 61;Vestido Deportivo;Vestido Deportivo;100;Vestidos;MPG;M;Gris;10;Disponible;P_61;Mujer
 62;Pants;Pants;20;Pantalones ;Americano;L;Azul;10;Disponible;P_62;Unisex
 63;Camiseta;Camiseta;40;Blusas;Old Navy;S;Celeste;10;Disponible;P_63;Mujer
