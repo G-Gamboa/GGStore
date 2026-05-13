@@ -1,11 +1,8 @@
 import { NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { sha256 } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 import crypto from "node:crypto";
-
-function sha256(input: string) {
-  return crypto.createHash("sha256").update(input).digest("hex");
-}
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null);

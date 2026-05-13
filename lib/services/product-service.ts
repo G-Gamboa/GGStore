@@ -1,4 +1,7 @@
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
+
+type ProductWithCategory = Prisma.ProductGetPayload<{ include: { category: true } }>;
 
 export async function getProductByExternalId(externalId: number) {
   return prisma.product.findFirst({
@@ -21,7 +24,7 @@ export async function updateProductStatusByExternalId(
   });
 }
 
-export function formatProductText(product: any) {
+export function formatProductText(product: ProductWithCategory) {
   return [
     `ID: ${product.externalId ?? "-"}`,
     `Nombre: ${product.name}`,

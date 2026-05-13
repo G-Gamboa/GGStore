@@ -3,8 +3,15 @@ import { getProductByExternalId, updateProductStatusByExternalId, formatProductT
 import { answerCallbackQuery, editMessageText, sendMessage, sendPhoto } from "@/lib/telegram";
 import { cldImg } from "@/lib/cloudinary";
 
-const ALLOWED_USER_ID = Number(process.env.TELEGRAM_ALLOWED_USER_ID || "0");
-const WEBHOOK_SECRET = process.env.TELEGRAM_WEBHOOK_SECRET || "";
+const ALLOWED_USER_ID = Number(process.env.TELEGRAM_ALLOWED_USER_ID ?? "0");
+const WEBHOOK_SECRET = process.env.TELEGRAM_WEBHOOK_SECRET ?? "";
+
+const VALID_STATUSES = ["AVAILABLE", "RESERVED", "SOLD"] as const;
+type ProductStatus = (typeof VALID_STATUSES)[number];
+
+function isValidStatus(s: string): s is ProductStatus {
+  return (VALID_STATUSES as readonly string[]).includes(s);
+}
 
 function isAllowedUser(userId?: number) {
   return !!userId && userId === ALLOWED_USER_ID;
@@ -130,10 +137,12 @@ export async function POST(req: NextRequest) {
       const [, rawId, status] = data.split(":");
       const externalId = Number(rawId);
 
-      const updated = await updateProductStatusByExternalId(
-        externalId,
-        status as "AVAILABLE" | "RESERVED" | "SOLD"
-      );
+      if (!isValidStatus(status)) {
+        await answerCallbackQuery(cq.id, "Estado inválido");
+        return NextResponse.json({ ok: true });
+      }
+
+      const updated = await updateProductStatusByExternalId(externalId, status);
 
       await editMessageText(
         chatId,

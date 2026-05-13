@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import type { Prisma } from "@prisma/client";
 import { Input, Select, Button } from "@/components/ui";
 import ProductGrid from "@/components/product-grid";
 export const dynamic = "force-dynamic";
@@ -29,28 +30,24 @@ export default async function Home({ searchParams }: { searchParams: Promise<SP>
 
   const categories = await prisma.category.findMany({ orderBy: { name: "asc" } });
 
-  const where: any = {
+  // RESERVED nunca se muestra públicamente
+  const where: Prisma.ProductWhereInput = {
     isActive: true,
-    ...(showSold ? { status: { in: ["AVAILABLE","SOLD"] } } : { status: "AVAILABLE" }),
+    status: showSold ? { in: ["AVAILABLE", "SOLD"], not: "RESERVED" } : "AVAILABLE",
+    ...(q && { name: { contains: q, mode: "insensitive" } }),
+    ...(category && { category: { slug: category } }),
+    ...(brand && { brand }),
+    ...(size && { size }),
+    ...(color && { color }),
+    ...(gender && { gender }),
+    ...(condition && { condition: Number(condition) }),
+    ...((min || max) && {
+      priceQ: {
+        ...(min && { gte: Number(min) }),
+        ...(max && { lte: Number(max) }),
+      },
+    }),
   };
-
-  // Reservado nunca se muestra públicamente
-  where.status = showSold ? { in: ["AVAILABLE", "SOLD"], not: "RESERVED" } : "AVAILABLE";
-
-
-  if (q) where.name = { contains: q, mode: "insensitive" };
-  if (category) where.category = { slug: category };
-  if (brand) where.brand = { equals: brand };
-  if (size) where.size = { equals: size };
-  if (color) where.color = { equals: color };
-  if (gender) where.gender = { equals: gender };
-  if (condition) where.condition = { equals: Number(condition) };
-
-  if (min || max) {
-    where.priceQ = {};
-    if (min) where.priceQ.gte = Number(min);
-    if (max) where.priceQ.lte = Number(max);
-  }
 
   const [total, products] = await Promise.all([
     prisma.product.count({ where }),
@@ -87,9 +84,8 @@ const pages = getPageWindow();
 
 const hasMore = skip + products.length < total;
 
-  // Build filter options from current dataset (simple approach)
   const opts = await prisma.product.findMany({
-    where: { isActive: true, ...(showSold ? { status: { in: ["AVAILABLE","SOLD"], not: "RESERVED" } } : { status: "AVAILABLE" }) },
+    where: { isActive: true, status: showSold ? { in: ["AVAILABLE", "SOLD"], not: "RESERVED" } : "AVAILABLE" },
     select: { brand: true, size: true, color: true, gender: true, condition: true, category: { select: { slug: true } } },
   });
 
@@ -268,10 +264,8 @@ const hasMore = skip + products.length < total;
           <div className="text-lg font-semibold">Productos</div>
           <div className="text-sm text-neutral-600">Orden: más recientes</div>
         </div>
-        {/* Grid animado */}
         <ProductGrid products={products} showStatus={showSold} />
         <div className="pt-4 flex items-center justify-center gap-2 flex-wrap">
-  {/* Prev */}
   <Link
     href={buildPageHref(Math.max(1, page - 1))}
     aria-disabled={page === 1}
@@ -280,7 +274,6 @@ const hasMore = skip + products.length < total;
     ←
   </Link>
 
-  {/* Pages */}
   {pages.map((p) => (
     <Link
       key={p}
@@ -291,7 +284,6 @@ const hasMore = skip + products.length < total;
     </Link>
   ))}
 
-  {/* Next */}
   <Link
     href={buildPageHref(Math.min(totalPages, page + 1))}
     aria-disabled={page === totalPages}

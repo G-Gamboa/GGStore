@@ -1,6 +1,6 @@
 export function cldImg(publicId: string, opts?: { w?: number }) {
-  const cloud = "dk7aiheee";
-  const folder = "ggstore";
+  const cloud = process.env.CLOUDINARY_CLOUD_NAME ?? "dk7aiheee";
+  const folder = process.env.CLOUDINARY_FOLDER ?? "ggstore";
   const w = opts?.w ?? 1000;
   const t = `f_auto,q_auto,w_${w},c_limit`;
 

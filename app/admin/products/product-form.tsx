@@ -5,8 +5,23 @@ import { useEffect, useMemo, useState } from "react";
 import { Button, Input, Select } from "@/components/ui";
 
 type Category = { id: string; name: string; slug: string };
-const CLOUDINARY_CLOUD = "dk7aiheee";
-const CLOUDINARY_FOLDER = "ggstore";
+
+const CLOUDINARY_CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? "dk7aiheee";
+const CLOUDINARY_FOLDER = process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER ?? "ggstore";
+
+type FormState = {
+  id: string;
+  externalId: string;
+  name: string;
+  priceQ: string;
+  categoryId: string;
+  brand: string;
+  size: string;
+  color: string;
+  condition: string;
+  gender: string;
+  isActive: boolean;
+};
 
 type Product = {
   id: string;
@@ -32,7 +47,7 @@ export default function ProductFormClient({ mode, id }: { mode: "create" | "edit
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState<string | null>(null);
 
-  const [form, setForm] = useState<any>({
+  const [form, setForm] = useState<FormState>({
     id: "",
     externalId: "",
     name: "",
@@ -63,7 +78,7 @@ export default function ProductFormClient({ mode, id }: { mode: "create" | "edit
         const cat0 = data.categories[0]?.id || "";
 
         if (mode === "create") {
-          setForm((f: any) => ({ ...f, categoryId: cat0 }));
+          setForm((f) => ({ ...f, categoryId: cat0 }));
           return;
         }
 
@@ -120,7 +135,6 @@ export default function ProductFormClient({ mode, id }: { mode: "create" | "edit
     });
     if (!res.ok) { setMsg(await res.text()); return; }
 
-    // listo: regresar
     window.location.href = "/admin/products";
   }
 
