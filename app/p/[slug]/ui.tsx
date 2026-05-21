@@ -1,44 +1,72 @@
 "use client";
 
-import { ShoppingBag } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { ShoppingBag, ShoppingCart, ArrowRight, Store } from "lucide-react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useCart } from "@/components/cart-store";
 
-type CartItem = {
+type ProductProps = {
   id: string;
   slug: string;
   name: string;
   priceQ: number;
-  qty: number;
   imageUrl: string | null;
   externalId: number | null;
 };
 
-export default function AddToCart({ product }: { product: Omit<CartItem, "qty"> }) {
+export default function AddToCart({ product }: { product: ProductProps }) {
   const [added, setAdded] = useState(false);
-  const router = useRouter();
-  const { add: addToCart } = useCart();
+  const { add: addToCart, count } = useCart();
 
-  function add() {
+  function handleAdd() {
     addToCart(product);
-
     setAdded(true);
-    setTimeout(() => setAdded(false), 1200);
-    
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/");
-    }
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <button onClick={add} className="gg-button gg-button-primary inline-flex items-center gap-2">
-        <ShoppingBag size={18} /> Agregar al carrito
-      </button>
-      {added ? <div className="text-sm text-neutral-600">Agregado.</div> : null}
-    </div>
+    <AnimatePresence mode="wait">
+      {added ? (
+        <motion.div
+          key="added"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.2 }}
+          className="gg-surface p-4 space-y-3"
+        >
+          <div className="flex items-center gap-2 text-[var(--gg-dark)] font-semibold">
+            <ShoppingCart size={18} />
+            ¡Agregado al carrito!
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Link
+              href="/carrito"
+              className="gg-button gg-button-primary inline-flex items-center justify-center gap-2"
+            >
+              Ver carrito ({count}) <ArrowRight size={16} />
+            </Link>
+            <Link
+              href="/"
+              className="gg-button gg-button-ghost inline-flex items-center justify-center gap-2"
+            >
+              <Store size={16} /> Seguir comprando
+            </Link>
+          </div>
+        </motion.div>
+      ) : (
+        <motion.button
+          key="add"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -6 }}
+          transition={{ duration: 0.2 }}
+          onClick={handleAdd}
+          className="gg-button gg-button-primary inline-flex items-center gap-2"
+        >
+          <ShoppingBag size={18} /> Agregar al carrito
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }

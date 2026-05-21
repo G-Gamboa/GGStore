@@ -254,9 +254,25 @@ const hasMore = skip + products.length < total;
 </section>
 
     {products.length === 0 ? (
-      <section className="gg-surface p-8 text-center">
-        <div className="text-lg font-semibold">Sin resultados</div>
-        <div className="mt-2 text-neutral-600">Prueba cambiando filtros o limpiando la búsqueda.</div>
+      <section className="gg-surface p-10 flex flex-col items-center gap-4 text-center">
+        <div
+          className="h-16 w-16 rounded-3xl flex items-center justify-center"
+          style={{ background: "var(--gg-secondary)" }}
+        >
+          <span className="text-3xl">🔍</span>
+        </div>
+        <div>
+          <div className="text-lg font-semibold">Sin resultados</div>
+          <div className="mt-1 text-sm text-neutral-500 max-w-xs">
+            No encontramos prendas con esos filtros. Intenta con otros criterios o limpia la búsqueda.
+          </div>
+        </div>
+        <Link
+          href="/"
+          className="gg-button gg-button-primary inline-flex items-center gap-2"
+        >
+          Limpiar filtros
+        </Link>
       </section>
     ) : (
       <section className="space-y-4">

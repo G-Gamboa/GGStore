@@ -1,13 +1,20 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export type CartItem = {
   id: string;
   slug: string;
   name: string;
   priceQ: number;
-  qty: number; // en tu caso siempre 1
+  qty: number;
   imageUrl: string | null;
   externalId: number | null;
 };
@@ -42,52 +49,53 @@ function safeWrite(items: CartItem[]) {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const refresh = () => setItems(safeRead());
+  const refresh = useCallback(() => setItems(safeRead()), []);
 
   useEffect(() => {
-    // inicial
     setItems(safeRead());
 
-    // sincroniza si hay otra pestaña
     const onStorage = (e: StorageEvent) => {
       if (e.key === "CART") setItems(safeRead());
     };
     window.addEventListener("storage", onStorage);
-
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const add = (p: Omit<CartItem, "qty">) => {
-    const curr = safeRead();
-    const idx = curr.findIndex((i) => i.id === p.id);
+  const add = useCallback((p: Omit<CartItem, "qty">) => {
+    setItems((prev) => {
+      const curr = [...prev];
+      const idx = curr.findIndex((i) => i.id === p.id);
+      if (idx >= 0) {
+        curr[idx] = { ...curr[idx], qty: 1 };
+      } else {
+        curr.push({ ...p, qty: 1 });
+      }
+      safeWrite(curr);
+      return curr;
+    });
+  }, []);
 
-    if (idx >= 0) {
-      // prenda única: qty siempre 1
-      curr[idx].qty = 1;
-    } else {
-      curr.push({ ...p, qty: 1 });
-    }
+  const remove = useCallback((id: string) => {
+    setItems((prev) => {
+      const next = prev.filter((i) => i.id !== id);
+      safeWrite(next);
+      return next;
+    });
+  }, []);
 
-    safeWrite(curr);
-    setItems(curr);
-  };
-
-  const remove = (id: string) => {
-    const curr = safeRead().filter((i) => i.id !== id);
-    safeWrite(curr);
-    setItems(curr);
-  };
-
-  const clear = () => {
+  const clear = useCallback(() => {
     safeWrite([]);
     setItems([]);
-  };
+  }, []);
 
-  const count = useMemo(() => items.reduce((acc, it) => acc + (it.qty || 0), 0), [items]);
+  const count = useMemo(
+    () => items.reduce((acc, it) => acc + (it.qty || 0), 0),
+    [items]
+  );
 
-  const value: CartContextValue = useMemo(
+  const value = useMemo<CartContextValue>(
     () => ({ items, count, add, remove, clear, refresh }),
-    [items, count]
+    [items, count, add, remove, clear, refresh]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

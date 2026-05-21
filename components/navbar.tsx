@@ -7,21 +7,17 @@ import { Leaf, LayoutGrid, ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart-store";
 
+type NavLinkProps = {
+  href: string;
+  label: string;
+  Icon: React.ElementType;
+  active: boolean;
+  isCart?: boolean;
+  cartCount?: number;
+  onClick?: () => void;
+};
 
-const links = [
-  { href: "/categorias", label: "Categorías", icon: LayoutGrid },
-  { href: "/carrito", label: "Carrito", icon: ShoppingBag },
-];
-
-export default function Navbar() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const { count } = useCart();
-
-function NavLink({ href, label, Icon, onClick }: any) {
-  const active = pathname === href || (href !== "/" && pathname?.startsWith(href));
-  const isCart = href === "/carrito";
-
+function NavLink({ href, label, Icon, active, isCart, cartCount, onClick }: NavLinkProps) {
   return (
     <Link
       href={href}
@@ -29,13 +25,22 @@ function NavLink({ href, label, Icon, onClick }: any) {
       className="gg-link relative inline-flex items-center gap-2"
     >
       <span className="relative inline-flex">
-        <Icon size={16} className={active ? "text-[var(--gg-dark)]" : "text-neutral-600"} />
+        <Icon size={16} className={active ? "text-[var(--gg-dark)]" : "text-neutral-500"} />
 
-        {isCart && count > 0 ? (
-          <span className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--gg-dark)] text-white text-[11px] leading-[18px] text-center">
-            {count}
-          </span>
-        ) : null}
+        <AnimatePresence>
+          {isCart && cartCount && cartCount > 0 ? (
+            <motion.span
+              key={cartCount}
+              initial={{ scale: 0.4, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.4, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 500, damping: 28 }}
+              className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--gg-dark)] text-white text-[11px] leading-[18px] text-center"
+            >
+              {cartCount}
+            </motion.span>
+          ) : null}
+        </AnimatePresence>
       </span>
 
       <span className={active ? "font-semibold" : ""}>{label}</span>
@@ -51,6 +56,20 @@ function NavLink({ href, label, Icon, onClick }: any) {
     </Link>
   );
 }
+
+const links = [
+  { href: "/categorias", label: "Categorías", icon: LayoutGrid },
+  { href: "/carrito", label: "Carrito", icon: ShoppingBag },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const { count } = useCart();
+
+  function isActive(href: string) {
+    return pathname === href || (href !== "/" && pathname?.startsWith(href));
+  }
 
   return (
     <header className="gg-nav sticky top-0 z-50">
@@ -68,43 +87,66 @@ function NavLink({ href, label, Icon, onClick }: any) {
         {/* Desktop */}
         <nav className="gg-navlinks hidden md:flex">
           {links.map(({ href, label, icon }) => (
-            <NavLink key={href} href={href} label={label} Icon={icon} />
+            <NavLink
+              key={href}
+              href={href}
+              label={label}
+              Icon={icon}
+              active={isActive(href)}
+              isCart={href === "/carrito"}
+              cartCount={count}
+            />
           ))}
         </nav>
 
-        {/* Mobile */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden gg-button gg-button-ghost inline-flex items-center justify-center"
-          aria-label="Abrir menú"
+          className="md:hidden gg-button gg-button-ghost inline-flex items-center justify-center w-10 h-10 p-0"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X size={18} /> : <Menu size={18} />}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={open ? "x" : "menu"}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              exit={{ rotate: 90, opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="inline-flex"
+            >
+              {open ? <X size={18} /> : <Menu size={18} />}
+            </motion.span>
+          </AnimatePresence>
         </button>
       </div>
 
+      {/* Mobile drawer */}
       <AnimatePresence>
-        {open ? (
+        {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            className="md:hidden border-b"
+            transition={{ duration: 0.22, ease: "easeInOut" }}
+            className="md:hidden border-b overflow-hidden"
             style={{ borderColor: "var(--gg-border)", background: "#fff" }}
           >
-            <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-2">
+            <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-1">
               {links.map(({ href, label, icon }) => (
                 <NavLink
                   key={href}
                   href={href}
                   label={label}
                   Icon={icon}
+                  active={isActive(href)}
+                  isCart={href === "/carrito"}
+                  cartCount={count}
                   onClick={() => setOpen(false)}
                 />
               ))}
             </div>
           </motion.div>
-        ) : null}
+        )}
       </AnimatePresence>
     </header>
   );
