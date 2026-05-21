@@ -1,8 +1,29 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import ProductGrid from "@/components/product-grid";
 import { PillLink } from "@/components/ui";
-export const dynamic = "force-dynamic";
+
+export const revalidate = 60; // ISR: regenera cada 60 s en segundo plano
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const category = await prisma.category.findUnique({ where: { slug } });
+
+  if (!category) return { title: "Categoría no encontrada" };
+
+  const title = category.name;
+  const description = `Explora ${title} en GGStore. Prendas únicas de segunda mano seleccionadas a los mejores precios.`;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
+}
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

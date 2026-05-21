@@ -1,12 +1,60 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import AddToCart from "./ui";
 import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
 import { PillLink } from "@/components/ui";
 import { Tag, Ruler, Palette, Shirt } from "lucide-react";
-export const dynamic = "force-dynamic";
+
+export const revalidate = 60; // ISR: regenera cada 60 s en segundo plano
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const p = await prisma.product.findUnique({
+    where: { slug },
+    include: { category: true },
+  });
+
+  if (!p) return { title: "Producto no encontrado" };
+
+  const title = p.name;
+  const price = formatQ(p.priceQ);
+  const chips = [p.brand, p.size, p.color, p.gender].filter(Boolean).join(" · ");
+  const description = [
+    price,
+    chips,
+    p.description ? p.description.slice(0, 120) : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const imageUrl = p.imageUrl ? cldImg(p.imageUrl, { w: 1200 }) : undefined;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(imageUrl && {
+        images: [{ url: imageUrl, width: 1200, height: 1200, alt: title }],
+      }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      ...(imageUrl && { images: [imageUrl] }),
+    },
+  };
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

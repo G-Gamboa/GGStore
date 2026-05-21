@@ -1,10 +1,26 @@
 import "./globals.css";
+import type { Metadata } from "next";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
 
-export const metadata = {
-  title: "GGStore",
-  description: "Catálogo de prendas de paca",
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "GGStore — Prendas de paca",
+    template: "%s | GGStore",
+  },
+  description:
+    "Catálogo de prendas únicas de segunda mano. Camisetas, pantalones, vestidos y más a precios increíbles. Pedidos por WhatsApp.",
+  openGraph: {
+    siteName: "GGStore",
+    type: "website",
+    locale: "es_GT",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
