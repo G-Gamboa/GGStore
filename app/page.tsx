@@ -118,30 +118,85 @@ const hasMore = skip + products.length < total;
 
   return (
   <div className="space-y-8">
-    <section className="gg-section p-8 md:p-10">
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[var(--gg-dark)]">Prendas únicas, seleccionadas cuidadosamente</h1>
-          <p className="mt-2 text-[color:var(--gg-muted)] max-w-2xl">
-            Agrega al carrito y envía tu pedido por WhatsApp.
-          </p>
-        </div>
-        <div className="gg-surface px-4 py-3 inline-flex items-center gap-3">
-          <div className="text-sm text-neutral-600">Productos:</div>
-          <div className="text-lg font-semibold">{total}</div>
+    {/* ── Hero ── */}
+    <section className="gg-hero">
+      <div className="relative z-10 p-8 md:p-12">
+        <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+
+          {/* Copy */}
+          <div className="space-y-5 max-w-xl">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-3 py-1 text-xs font-semibold text-[var(--gg-dark)] backdrop-blur-sm">
+              ✨ Paca seleccionada · Guatemala
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-[var(--gg-dark)]">
+              Prendas únicas,{" "}
+              <span className="gg-gradient-text">a tu alcance.</span>
+            </h1>
+
+            <p className="text-[color:var(--gg-muted)] text-base leading-relaxed">
+              Ropa de segunda mano cuidadosamente seleccionada.
+              Pedidos por WhatsApp, sin complicaciones.
+            </p>
+
+            {/* Category quick-links */}
+            {categories.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-1">
+                {categories.slice(0, 5).map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/c/${c.slug}`}
+                    className="rounded-full border border-white/90 bg-white/70 px-3.5 py-1 text-xs font-semibold text-[var(--gg-dark)] backdrop-blur-sm transition-colors hover:bg-white"
+                  >
+                    {c.name}
+                  </Link>
+                ))}
+                {categories.length > 5 && (
+                  <Link
+                    href="/categorias"
+                    className="rounded-full border border-white/90 bg-white/70 px-3.5 py-1 text-xs font-semibold text-[var(--gg-dark)] backdrop-blur-sm transition-colors hover:bg-white"
+                  >
+                    +{categories.length - 5} más →
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-3 md:flex-col">
+            <div className="gg-stat-box">
+              <div className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+                {total}
+              </div>
+              <div className="mt-0.5 text-xs font-medium text-[color:var(--gg-muted)]">
+                Disponibles
+              </div>
+            </div>
+            <div className="gg-stat-box">
+              <div className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+                {categories.length}
+              </div>
+              <div className="mt-0.5 text-xs font-medium text-[color:var(--gg-muted)]">
+                Categorías
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
     <section className="gg-surface p-6 space-y-4 hidden md:block">
   <div className="flex items-center justify-between">
-    <div>
-      <div className="text-sm text-neutral-600">Encuentra lo que necesitas</div>
-      <div className="text-lg font-semibold">Filtros</div>
+    <div className="flex items-center gap-2">
+      <div className="h-7 w-7 rounded-xl flex items-center justify-center text-sm"
+        style={{ background: "var(--gg-secondary)" }}>🔍</div>
+      <div className="font-bold text-[var(--gg-dark)]">Filtros</div>
     </div>
-    <div className="text-sm text-neutral-600">
-      {showSold ? "Mostrando disponibles y vendidos" : "Mostrando solo disponibles"}
-    </div>
+    <span className="gg-chip text-xs">
+      {showSold ? "Disponibles + vendidos" : "Solo disponibles"}
+    </span>
   </div>
 
   <form key={formKey} className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -194,11 +249,12 @@ const hasMore = skip + products.length < total;
 <section className="gg-surface p-5 md:hidden">
   <details>
     <summary className="cursor-pointer list-none flex items-center justify-between">
-      <div>
-        <div className="text-sm text-neutral-600">Encuentra lo que necesitas</div>
-        <div className="text-lg font-semibold">Filtros</div>
+      <div className="flex items-center gap-2">
+        <div className="h-7 w-7 rounded-xl flex items-center justify-center text-sm"
+          style={{ background: "var(--gg-secondary)" }}>🔍</div>
+        <div className="font-bold text-[var(--gg-dark)]">Filtros</div>
       </div>
-      <span className="gg-chip">Abrir</span>
+      <span className="gg-chip">Abrir ↓</span>
     </summary>
     <div className="mt-4 space-y-3">
       <div className="text-sm text-neutral-600">
@@ -277,8 +333,11 @@ const hasMore = skip + products.length < total;
     ) : (
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <div className="text-lg font-semibold">Productos</div>
-          <div className="text-sm text-neutral-600">Orden: más recientes</div>
+          <div className="flex items-center gap-2">
+            <div className="text-lg font-bold text-[var(--gg-dark)]">Catálogo</div>
+            <span className="gg-badge gg-badge-available">{total}</span>
+          </div>
+          <span className="gg-chip text-xs">Más recientes</span>
         </div>
         <ProductGrid products={products} showStatus={showSold} />
         <div className="pt-4 flex items-center justify-center gap-2 flex-wrap">

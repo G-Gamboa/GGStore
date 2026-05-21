@@ -25,8 +25,10 @@ function NavLink({ href, label, Icon, active, isCart, cartCount, onClick }: NavL
       className="gg-link relative inline-flex items-center gap-2"
     >
       <span className="relative inline-flex">
-        <Icon size={16} className={active ? "text-[var(--gg-dark)]" : "text-neutral-500"} />
-
+        <Icon
+          size={16}
+          className={active ? "text-[var(--gg-dark)]" : "text-neutral-500"}
+        />
         <AnimatePresence>
           {isCart && cartCount && cartCount > 0 ? (
             <motion.span
@@ -35,7 +37,8 @@ function NavLink({ href, label, Icon, active, isCart, cartCount, onClick }: NavL
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.4, opacity: 0 }}
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
-              className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-[var(--gg-dark)] text-white text-[11px] leading-[18px] text-center"
+              className="absolute -top-2 -right-2 min-w-[18px] h-[18px] px-1 rounded-full text-white text-[11px] leading-[18px] text-center font-bold"
+              style={{ background: "var(--gg-dark)" }}
             >
               {cartCount}
             </motion.span>
@@ -43,13 +46,13 @@ function NavLink({ href, label, Icon, active, isCart, cartCount, onClick }: NavL
         </AnimatePresence>
       </span>
 
-      <span className={active ? "font-semibold" : ""}>{label}</span>
+      <span className={active ? "font-bold" : ""}>{label}</span>
 
       {active ? (
         <motion.span
           layoutId="nav-pill"
           className="absolute inset-0 -z-10 rounded-xl"
-          style={{ background: "rgba(192,250,190,0.55)" }}
+          style={{ background: "rgba(187, 247, 208, 0.6)" }}
           transition={{ type: "spring", stiffness: 500, damping: 35 }}
         />
       ) : null}
@@ -74,17 +77,21 @@ export default function Navbar() {
   return (
     <header className="gg-nav sticky top-0 z-50">
       <div className="gg-nav-inner">
-        <Link href="/" className="gg-brand">
-          <span
-            className="inline-flex h-9 w-9 items-center justify-center rounded-2xl"
+
+        {/* Brand */}
+        <Link href="/" className="gg-brand group">
+          <motion.span
+            whileHover={{ rotate: [0, -10, 10, 0] }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-2xl shadow-sm"
             style={{ background: "var(--gg-primary)" }}
           >
-            <Leaf size={18} className="text-[var(--gg-dark)]" />
-          </span>
-          <span>GGStore</span>
+            <Leaf size={17} className="text-[var(--gg-dark)]" />
+          </motion.span>
+          <span className="gg-gradient-text text-lg">GGStore</span>
         </Link>
 
-        {/* Desktop */}
+        {/* Desktop nav */}
         <nav className="gg-navlinks hidden md:flex">
           {links.map(({ href, label, icon }) => (
             <NavLink
@@ -129,7 +136,7 @@ export default function Navbar() {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.22, ease: "easeInOut" }}
             className="md:hidden border-b overflow-hidden"
-            style={{ borderColor: "var(--gg-border)", background: "#fff" }}
+            style={{ borderColor: "var(--gg-border-soft)", background: "#fff" }}
           >
             <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-1">
               {links.map(({ href, label, icon }) => (

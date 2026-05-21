@@ -5,10 +5,9 @@ import { prisma } from "@/lib/prisma";
 import AddToCart from "./ui";
 import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
-import { PillLink } from "@/components/ui";
-import { Tag, Ruler, Palette, Shirt } from "lucide-react";
+import { Tag, Ruler, Palette, Shirt, Star, ArrowLeft } from "lucide-react";
 
-export const revalidate = 60; // ISR: regenera cada 60 s en segundo plano
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -16,25 +15,14 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-
-  const p = await prisma.product.findUnique({
-    where: { slug },
-    include: { category: true },
-  });
+  const p = await prisma.product.findUnique({ where: { slug }, include: { category: true } });
 
   if (!p) return { title: "Producto no encontrado" };
 
   const title = p.name;
   const price = formatQ(p.priceQ);
   const chips = [p.brand, p.size, p.color, p.gender].filter(Boolean).join(" · ");
-  const description = [
-    price,
-    chips,
-    p.description ? p.description.slice(0, 120) : null,
-  ]
-    .filter(Boolean)
-    .join(" · ");
-
+  const description = [price, chips, p.description?.slice(0, 120)].filter(Boolean).join(" · ");
   const imageUrl = p.imageUrl ? cldImg(p.imageUrl, { w: 1200 }) : undefined;
 
   return {
@@ -43,9 +31,7 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      ...(imageUrl && {
-        images: [{ url: imageUrl, width: 1200, height: 1200, alt: title }],
-      }),
+      ...(imageUrl && { images: [{ url: imageUrl, width: 1200, height: 1200, alt: title }] }),
     },
     twitter: {
       card: "summary_large_image",
@@ -56,38 +42,76 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
-  const p = await prisma.product.findUnique({
-    where: { slug },
-    include: { category: true },
-  });
+  const p = await prisma.product.findUnique({ where: { slug }, include: { category: true } });
 
-  if (!p) return <div>Producto no encontrado.</div>;
+  if (!p) {
+    return (
+      <div className="gg-surface p-12 text-center space-y-3">
+        <div className="text-4xl">🔍</div>
+        <div className="text-lg font-semibold">Producto no encontrado</div>
+        <Link href="/" className="gg-button gg-button-primary inline-flex items-center gap-2">
+          <ArrowLeft size={16} /> Ver catálogo
+        </Link>
+      </div>
+    );
+  }
 
   const settings = await prisma.settings.findFirst();
   const showSold = settings?.showSoldPublic ?? false;
 
-  if (p.status === "RESERVED") return <div>Producto no disponible.</div>;
-  if (!showSold && p.status === "SOLD") return <div>Producto no disponible.</div>;
+  if (p.status === "RESERVED" || (!showSold && p.status === "SOLD")) {
+    return (
+      <div className="gg-surface p-12 text-center space-y-3">
+        <div className="text-4xl">😔</div>
+        <div className="text-lg font-semibold">Producto no disponible</div>
+        <Link href="/" className="gg-button gg-button-primary inline-flex items-center gap-2">
+          <ArrowLeft size={16} /> Ver catálogo
+        </Link>
+      </div>
+    );
+  }
 
-  const img = p.imageUrl ? cldImg(p.imageUrl, { w: 1200 }) : "https://placehold.co/1200x1200/png?text=GGStore";
+  const img = p.imageUrl
+    ? cldImg(p.imageUrl, { w: 1200 })
+    : "https://placehold.co/1200x1200/f0fdf4/14532d?text=GGStore";
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-neutral-500">
-          <Link href={`/c/${p.category.slug}`} className="underline">{p.category.name}</Link>
-        </div>
-        <PillLink href={`/c/${p.category.slug}`}>Volver</PillLink>
+    <div className="space-y-4">
+
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1 text-[color:var(--gg-muted)] hover:text-[var(--gg-dark)] transition-colors"
+        >
+          <ArrowLeft size={14} /> Catálogo
+        </Link>
+        <span className="text-neutral-300">/</span>
+        <Link
+          href={`/c/${p.category.slug}`}
+          className="text-[color:var(--gg-muted)] hover:text-[var(--gg-dark)] transition-colors"
+        >
+          {p.category.name}
+        </Link>
       </div>
 
-      <div className="gg-surface p-5 md:p-6">
-        <div className="grid gap-6 lg:grid-cols-2">
+      {/* Card principal */}
+      <div className="gg-surface p-5 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-2">
+
           {/* Imagen */}
-          <div className="overflow-hidden rounded-2xl border" style={{ borderColor: "var(--gg-border)" }}>
-            <div className="relative aspect-square bg-white">
+          <div
+            className="overflow-hidden rounded-3xl"
+            style={{ border: "1px solid var(--gg-border-soft)" }}
+          >
+            <div className="relative aspect-square bg-[var(--gg-bg)]">
               <Image
                 src={img}
                 alt={p.name}
@@ -100,27 +124,76 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           {/* Info */}
-          <div className="space-y-4">
+          <div className="flex flex-col gap-5">
+
+            {/* Categoría + nombre + precio */}
             <div>
-              <h1 className="text-2xl md:text-3xl font-semibold">{p.name}</h1>
-              <div className="mt-2 text-2xl font-semibold text-[var(--gg-dark)]">{formatQ(p.priceQ)}</div>
-            </div>
+              <Link
+                href={`/c/${p.category.slug}`}
+                className="text-xs font-semibold uppercase tracking-widest text-[color:var(--gg-muted)] hover:text-[var(--gg-dark)] transition-colors"
+              >
+                {p.category.name}
+              </Link>
+              <h1 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+                {p.name}
+              </h1>
 
-            <div className="flex flex-wrap gap-2">
-              {p.brand ? <span className="gg-chip inline-flex items-center gap-1"><Tag size={14} /> {p.brand}</span> : null}
-              {p.size ? <span className="gg-chip inline-flex items-center gap-1"><Ruler size={14} /> {p.size}</span> : null}
-              {p.color ? <span className="gg-chip inline-flex items-center gap-1"><Palette size={14} /> {p.color}</span> : null}
-              {p.gender ? <span className="gg-chip inline-flex items-center gap-1"><Shirt size={14} /> {p.gender}</span> : null}
-              {typeof p.condition === "number" ? <span className="gg-chip">Estado: {p.condition}/10</span> : null}
-            </div>
-
-            {p.description ? (
-              <div className="rounded-2xl p-4" style={{ background: "var(--gg-secondary)" }}>
-                <div className="text-sm font-semibold text-[var(--gg-dark)]">Descripción</div>
-                <div className="mt-2 text-sm text-neutral-700 whitespace-pre-wrap">{p.description}</div>
+              {/* Precio destacado */}
+              <div className="mt-3 inline-flex items-baseline gap-2">
+                <span
+                  className="text-3xl font-extrabold tracking-tight"
+                  style={{ color: "var(--gg-dark)" }}
+                >
+                  {formatQ(p.priceQ)}
+                </span>
+                {p.condition !== null && (
+                  <span className="gg-badge gg-badge-available text-xs">
+                    <Star size={11} fill="currentColor" /> Estado {p.condition}/10
+                  </span>
+                )}
               </div>
-            ) : null}
+            </div>
 
+            {/* Chips de atributos */}
+            <div className="flex flex-wrap gap-2">
+              {p.brand && (
+                <span className="gg-chip inline-flex items-center gap-1.5 text-sm px-3 py-1">
+                  <Tag size={13} /> {p.brand}
+                </span>
+              )}
+              {p.size && (
+                <span className="gg-chip inline-flex items-center gap-1.5 text-sm px-3 py-1">
+                  <Ruler size={13} /> {p.size}
+                </span>
+              )}
+              {p.color && (
+                <span className="gg-chip inline-flex items-center gap-1.5 text-sm px-3 py-1">
+                  <Palette size={13} /> {p.color}
+                </span>
+              )}
+              {p.gender && (
+                <span className="gg-chip inline-flex items-center gap-1.5 text-sm px-3 py-1">
+                  <Shirt size={13} /> {p.gender}
+                </span>
+              )}
+            </div>
+
+            {/* Descripción */}
+            {p.description && (
+              <div
+                className="rounded-2xl p-5"
+                style={{ background: "var(--gg-secondary)", border: "1px solid var(--gg-border-soft)" }}
+              >
+                <div className="text-xs font-bold uppercase tracking-widest text-[color:var(--gg-muted)] mb-2">
+                  Descripción
+                </div>
+                <p className="text-sm text-neutral-700 leading-relaxed whitespace-pre-wrap">
+                  {p.description}
+                </p>
+              </div>
+            )}
+
+            {/* CTA */}
             {p.status === "AVAILABLE" ? (
               <AddToCart
                 product={{
@@ -133,8 +206,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 }}
               />
             ) : (
-              <div className="rounded-2xl border p-4 text-sm" style={{ borderColor: "var(--gg-border)" }}>
-                Este producto no está disponible.
+              <div
+                className="rounded-2xl p-4 text-sm text-neutral-600"
+                style={{ background: "var(--gg-bg)", border: "1px solid var(--gg-border-soft)" }}
+              >
+                Este producto ya no está disponible.
               </div>
             )}
           </div>
