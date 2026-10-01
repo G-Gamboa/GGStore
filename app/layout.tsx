@@ -1,9 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Outfit } from "next/font/google";
 import { Leaf } from "lucide-react";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
+
+/* Tipografía de la marca Boa Estudio, solo para el crédito */
+const outfit = Outfit({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -88,11 +92,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </nav>
               </div>
 
+              {/* Crédito */}
               <div
-                className="mt-8 pt-6 text-center text-[11px] text-[color:var(--gg-muted)]"
+                className={`${outfit.className} mt-8 pt-6 flex items-baseline justify-center gap-2 text-sm text-[color:var(--gg-muted)]`}
                 style={{ borderTop: "1px solid var(--gg-border-soft)" }}
               >
-                © {new Date().getFullYear()} GGStore · Hecho con 💚 en Guatemala
+                Desarrollado por
+                <a
+                  href="https://www.boaestudio.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Boa Estudio"
+                  className="inline-flex items-baseline text-lg text-[#141a17] opacity-85 hover:opacity-100 transition-opacity"
+                >
+                  <span className="font-bold tracking-tight">boa</span>
+                  <span
+                    className="inline-block rounded-full"
+                    style={{ width: "0.26em", height: "0.26em", margin: "0 0.24em 0 0.06em", background: "#2f7d5b" }}
+                  />
+                  <span className="font-light">estudio</span>
+                </a>
               </div>
             </div>
           </footer>
