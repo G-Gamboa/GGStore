@@ -33,14 +33,17 @@ export default function Image() {
               width: "80px",
               height: "80px",
               borderRadius: "28px",
-              background: "#4ade80",
+              background: "#14532d",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "40px",
             }}
           >
-            🌿
+            <svg width="48" height="48" viewBox="0 0 44 44" fill="none">
+              <path d="M22 32 C22 32 9 24 9 14 C9 8 14.5 6 22 9.5 Z" fill="#4ade80"/>
+              <path d="M22 32 C22 32 35 24 35 14 C35 8 29.5 6 22 9.5 Z" fill="#86efac"/>
+              <path d="M22 9.5 L22 34" stroke="#d1fae5" strokeWidth="1.4" strokeLinecap="round"/>
+            </svg>
           </div>
           <span
             style={{
@@ -73,7 +76,7 @@ export default function Image() {
             color: "#4b7a5e",
           }}
         >
-          <span>Guatemala 🇬🇹</span>
+          <span>Guatemala</span>
           <span style={{ color: "#86efac" }}>·</span>
           <span>Pedidos por WhatsApp</span>
           <span style={{ color: "#86efac" }}>·</span>

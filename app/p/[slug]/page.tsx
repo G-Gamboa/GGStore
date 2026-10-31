@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 import AddToCart from "./ui";
 import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
-import { Tag, Ruler, Palette, Shirt, Star, ArrowLeft } from "lucide-react";
+import { Tag, Ruler, Palette, Shirt, Star, ArrowLeft, Search, PackageX } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -54,7 +54,7 @@ export default async function ProductPage({
   if (!p) {
     return (
       <div className="gg-surface p-12 text-center space-y-3">
-        <div className="text-4xl">🔍</div>
+        <div className="flex justify-center"><Search size={44} className="text-neutral-300" /></div>
         <div className="text-lg font-semibold">Producto no encontrado</div>
         <Link href="/" className="gg-button gg-button-primary inline-flex items-center gap-2">
           <ArrowLeft size={16} /> Ver catálogo
@@ -69,7 +69,7 @@ export default async function ProductPage({
   if (p.status === "RESERVED" || (!showSold && p.status === "SOLD")) {
     return (
       <div className="gg-surface p-12 text-center space-y-3">
-        <div className="text-4xl">😔</div>
+        <div className="flex justify-center"><PackageX size={44} className="text-neutral-300" /></div>
         <div className="text-lg font-semibold">Producto no disponible</div>
         <Link href="/" className="gg-button gg-button-primary inline-flex items-center gap-2">
           <ArrowLeft size={16} /> Ver catálogo

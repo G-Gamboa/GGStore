@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { ChevronRight, ShoppingBag } from "lucide-react";
+import {
+  ChevronRight, ShoppingBag,
+  Shirt, Sparkles, Footprints, Leaf, Star, Gift, Gem,
+  Scissors, Layers, Tag, LayoutGrid, Glasses,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export const revalidate = 60;
 
@@ -10,20 +15,22 @@ export const metadata: Metadata = {
   description: "Explora todas las categorías de prendas disponibles en GGStore.",
 };
 
-/* Paleta de colores para las tarjetas de categoría */
-const PALETTE = [
-  { bg: "#fce7f3", border: "#f9a8d4", text: "#9d174d", icon: "👗" },
-  { bg: "#ede9fe", border: "#c4b5fd", text: "#5b21b6", icon: "✨" },
-  { bg: "#dbeafe", border: "#93c5fd", text: "#1d4ed8", icon: "👟" },
-  { bg: "#d1fae5", border: "#6ee7b7", text: "#065f46", icon: "🍃" },
-  { bg: "#fef3c7", border: "#fcd34d", text: "#92400e", icon: "⭐" },
-  { bg: "#ffedd5", border: "#fdba74", text: "#9a3412", icon: "🎁" },
-  { bg: "#cffafe", border: "#67e8f9", text: "#0e7490", icon: "💎" },
-  { bg: "#f5f3ff", border: "#c4b5fd", text: "#6d28d9", icon: "🛍️" },
-  { bg: "#fef2f2", border: "#fca5a5", text: "#991b1b", icon: "🧣" },
-  { bg: "#ecfdf5", border: "#6ee7b7", text: "#065f46", icon: "🧥" },
-  { bg: "#fff7ed", border: "#fed7aa", text: "#9a3412", icon: "👔" },
-  { bg: "#f0f9ff", border: "#7dd3fc", text: "#075985", icon: "🩳" },
+type PaletteEntry = { bg: string; border: string; text: string; Icon: LucideIcon };
+
+const PALETTE: PaletteEntry[] = [
+  { bg: "#fce7f3", border: "#f9a8d4", text: "#9d174d", Icon: Shirt },
+  { bg: "#ede9fe", border: "#c4b5fd", text: "#5b21b6", Icon: Sparkles },
+  { bg: "#dbeafe", border: "#93c5fd", text: "#1d4ed8", Icon: Footprints },
+  { bg: "#d1fae5", border: "#6ee7b7", text: "#065f46", Icon: Leaf },
+  { bg: "#fef3c7", border: "#fcd34d", text: "#92400e", Icon: Star },
+  { bg: "#ffedd5", border: "#fdba74", text: "#9a3412", Icon: Gift },
+  { bg: "#cffafe", border: "#67e8f9", text: "#0e7490", Icon: Gem },
+  { bg: "#f5f3ff", border: "#c4b5fd", text: "#6d28d9", Icon: ShoppingBag },
+  { bg: "#fef2f2", border: "#fca5a5", text: "#991b1b", Icon: Scissors },
+  { bg: "#ecfdf5", border: "#6ee7b7", text: "#065f46", Icon: Layers },
+  { bg: "#fff7ed", border: "#fed7aa", text: "#9a3412", Icon: Tag },
+  { bg: "#f0f9ff", border: "#7dd3fc", text: "#075985", Icon: LayoutGrid },
+  { bg: "#fdf4ff", border: "#e9d5ff", text: "#6b21a8", Icon: Glasses },
 ];
 
 export default async function CategoriesPage() {
@@ -90,10 +97,10 @@ export default async function CategoriesPage() {
                 >
                   {/* Icon */}
                   <div
-                    className="h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 text-2xl shadow-sm"
+                    className="h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 shadow-sm"
                     style={{ background: "rgba(255,255,255,0.7)" }}
                   >
-                    {palette.icon}
+                    <palette.Icon size={26} style={{ color: palette.text }} />
                   </div>
 
                   {/* Info */}

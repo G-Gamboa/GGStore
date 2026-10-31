@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import { Input, Select, Button } from "@/components/ui";
 import ProductGrid from "@/components/product-grid";
+import { Search, SlidersHorizontal } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 type SP = { [k: string]: string | string[] | undefined };
@@ -190,8 +191,10 @@ const hasMore = skip + products.length < total;
     <section className="gg-surface p-6 space-y-4 hidden md:block">
   <div className="flex items-center justify-between">
     <div className="flex items-center gap-2">
-      <div className="h-7 w-7 rounded-xl flex items-center justify-center text-sm"
-        style={{ background: "var(--gg-secondary)" }}>🔍</div>
+      <div className="h-7 w-7 rounded-xl flex items-center justify-center"
+        style={{ background: "var(--gg-secondary)" }}>
+        <SlidersHorizontal size={14} style={{ color: "var(--gg-dark)" }} />
+      </div>
       <div className="font-bold text-[var(--gg-dark)]">Filtros</div>
     </div>
     <span className="gg-chip text-xs">
@@ -250,8 +253,10 @@ const hasMore = skip + products.length < total;
   <details>
     <summary className="cursor-pointer list-none flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <div className="h-7 w-7 rounded-xl flex items-center justify-center text-sm"
-          style={{ background: "var(--gg-secondary)" }}>🔍</div>
+        <div className="h-7 w-7 rounded-xl flex items-center justify-center"
+          style={{ background: "var(--gg-secondary)" }}>
+          <SlidersHorizontal size={14} style={{ color: "var(--gg-dark)" }} />
+        </div>
         <div className="font-bold text-[var(--gg-dark)]">Filtros</div>
       </div>
       <span className="gg-chip">Abrir ↓</span>
@@ -315,7 +320,7 @@ const hasMore = skip + products.length < total;
           className="h-16 w-16 rounded-3xl flex items-center justify-center"
           style={{ background: "var(--gg-secondary)" }}
         >
-          <span className="text-3xl">🔍</span>
+          <Search size={28} style={{ color: "var(--gg-dark)" }} />
         </div>
         <div>
           <div className="text-lg font-semibold">Sin resultados</div>

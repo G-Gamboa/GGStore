@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Tag, Ruler, CheckCircle2, XCircle, Clock3 } from "lucide-react";
+import { Tag, Ruler, XCircle, Clock3, ArrowRight } from "lucide-react";
 import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
 
@@ -22,107 +22,115 @@ type Product = {
 };
 
 function StatusBadge({ status }: { status: Product["status"] }) {
-  if (status === "AVAILABLE") {
-    return (
-      <span className="gg-badge gg-badge-available">
-        <CheckCircle2 size={12} /> Disponible
-      </span>
-    );
-  }
   if (status === "RESERVED") {
     return (
       <span className="gg-badge gg-badge-reserved">
-        <Clock3 size={12} /> Reservado
+        <Clock3 size={11} /> Reservado
       </span>
     );
   }
   return (
     <span className="gg-badge gg-badge-sold">
-      <XCircle size={12} /> Vendido
+      <XCircle size={11} /> Vendido
     </span>
   );
 }
 
-export default function ProductCard({
-  p,
-  showStatus,
-}: {
-  p: Product;
-  showStatus: boolean;
-}) {
+export default function ProductCard({ p, showStatus }: { p: Product; showStatus: boolean }) {
   const img = p.imageUrl
     ? cldImg(p.imageUrl, { w: 700 })
-    : "https://placehold.co/700x700/f0fdf4/14532d?text=GGStore";
+    : "https://placehold.co/700x933/f0fdf4/14532d?text=GGStore";
+
+  const isUnavailable = p.status !== "AVAILABLE";
 
   return (
     <motion.div
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 380, damping: 28 }}
-      className="gg-surface overflow-hidden group"
+      whileHover={{ y: -6 }}
+      transition={{ type: "spring", stiffness: 360, damping: 26 }}
+      className="gg-product-card group"
     >
       <Link href={`/p/${p.slug}`} className="block">
 
         {/* ── Imagen ── */}
-        <div className="relative aspect-square overflow-hidden bg-[var(--gg-bg)]">
+        <div className="relative aspect-[3/4] overflow-hidden rounded-t-[18px] bg-[var(--gg-bg)]">
           <motion.div
             className="absolute inset-0"
             whileHover={{ scale: 1.06 }}
-            transition={{ duration: 0.38, ease: "easeOut" }}
+            transition={{ duration: 0.42, ease: "easeOut" }}
           >
             <Image
               src={img}
               alt={p.name}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-              className="object-cover"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 22vw"
+              className={`object-cover transition-[filter] duration-300 ${
+                isUnavailable ? "grayscale opacity-60" : ""
+              }`}
             />
           </motion.div>
 
-          {/* Gradiente inferior */}
+          {/* Gradient para precio */}
           <div
-            className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%)",
-            }}
+            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+            style={{ background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%)" }}
           />
 
-          {/* Precio flotante — bottom right */}
-          <div className="absolute bottom-2 right-2 z-10">
+          {/* Precio */}
+          <div className="absolute bottom-3 left-3 z-10">
             <span className="gg-price-badge">{formatQ(p.priceQ)}</span>
           </div>
 
-          {/* Status badge — top left */}
-          {showStatus && (
-            <div className="absolute left-2 top-2 z-10">
+          {/* Status badge */}
+          {showStatus && isUnavailable && (
+            <div className="absolute top-2.5 right-2.5 z-10">
               <StatusBadge status={p.status} />
             </div>
           )}
+
+          {/* Hover CTA */}
+          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              whileHover={{ opacity: 1, y: 0 }}
+              className="opacity-0 group-hover:opacity-100 transition-all duration-200"
+            >
+              <div
+                className="flex items-center gap-2 rounded-2xl px-4 py-2.5 text-sm font-bold shadow-xl"
+                style={{
+                  background: "rgba(255,255,255,0.92)",
+                  backdropFilter: "blur(8px)",
+                  color: "var(--gg-dark)",
+                }}
+              >
+                Ver prenda <ArrowRight size={15} />
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* ── Cuerpo ── */}
-        <div className="p-3 space-y-1.5">
+        <div className="px-3.5 pt-3 pb-3.5 space-y-1.5">
           {/* Categoría */}
-          <div className="text-[11px] font-medium uppercase tracking-wide text-[color:var(--gg-muted)] line-clamp-1">
+          <div className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--gg-muted)] line-clamp-1">
             {p.category?.name ?? "Sin categoría"}
           </div>
 
           {/* Nombre */}
-          <div className="text-sm font-semibold leading-snug line-clamp-2 text-neutral-800">
+          <div className="text-[13px] font-bold leading-snug line-clamp-2 text-neutral-900" style={{ minHeight: "2.6rem" }}>
             {p.name}
           </div>
 
-          {/* Chips: sólo marca y talla */}
+          {/* Chips */}
           {(p.brand || p.size) && (
             <div className="flex flex-wrap gap-1 pt-0.5">
               {p.brand && (
-                <span className="gg-chip inline-flex items-center gap-1 text-[11px]">
-                  <Tag size={10} /> {p.brand}
+                <span className="gg-chip inline-flex items-center gap-1 text-[10px] px-2 py-0.5">
+                  <Tag size={9} /> {p.brand}
                 </span>
               )}
               {p.size && (
-                <span className="gg-chip inline-flex items-center gap-1 text-[11px]">
-                  <Ruler size={10} /> {p.size}
+                <span className="gg-chip inline-flex items-center gap-1 text-[10px] px-2 py-0.5">
+                  <Ruler size={9} /> {p.size}
                 </span>
               )}
             </div>
