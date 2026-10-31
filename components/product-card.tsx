@@ -116,7 +116,7 @@ export default function ProductCard({ p, showStatus }: { p: Product; showStatus:
           </div>
 
           {/* Nombre */}
-          <div className="text-[13px] font-bold leading-snug line-clamp-2 text-neutral-900" style={{ minHeight: "2.6rem" }}>
+          <div className="gg-display text-[13px] font-bold leading-snug line-clamp-2 text-neutral-900" style={{ minHeight: "2.6rem", letterSpacing: "-0.02em" }}>
             {p.name}
           </div>
 

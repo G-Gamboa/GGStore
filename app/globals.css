@@ -5,10 +5,15 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  font-size: 15px;
 }
 
 /* ── Tokens ───────────────────────────────────────────────── */
 :root {
+  /* Fuentes — los valores reales los inyecta Next.js en el body */
+  --gg-font-body:    "Inter", system-ui, sans-serif;
+  --gg-font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+
   --gg-primary:       #bbf7d0;
   --gg-primary-deep:  #86efac;
   --gg-secondary:     #dcfce7;
@@ -30,6 +35,33 @@ html {
 body {
   background: var(--gg-bg);
   color: #0a0f0c;
+  font-family: var(--gg-font-body), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* ── Tipografía display ────────────────────────────────────── */
+h1, h2, h3 {
+  font-family: var(--gg-font-display), system-ui, sans-serif;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-feature-settings: "ss01";
+}
+
+.gg-display {
+  font-family: var(--gg-font-display), system-ui, sans-serif;
+  font-feature-settings: "ss01";
+}
+
+.gg-num {
+  font-family: var(--gg-font-display), system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  font-feature-settings: "tnum";
 }
 
 /* ── Surfaces ─────────────────────────────────────────────── */
@@ -99,6 +131,13 @@ body {
   min-width: 100px;
 }
 
+.gg-stat-box .gg-stat-num {
+  font-family: var(--gg-font-display), system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
 /* ── Gradient text ────────────────────────────────────────── */
 .gg-gradient-text {
   background: linear-gradient(135deg, var(--gg-dark-mid) 0%, var(--gg-dark) 100%);
@@ -113,9 +152,11 @@ body {
   color: #ffffff;
   border-radius: 12px;
   padding: 0.3rem 0.7rem;
+  font-family: var(--gg-font-display), system-ui, sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
   box-shadow: 0 4px 12px rgba(245, 158, 11, 0.40);
   display: inline-block;
 }
@@ -270,8 +311,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  font-family: var(--gg-font-display), system-ui, sans-serif;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .gg-navlinks {

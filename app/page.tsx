@@ -130,7 +130,7 @@ const hasMore = skip + products.length < total;
               Paca seleccionada · Guatemala
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-white">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-white" style={{ letterSpacing: "-0.04em", lineHeight: 1.05 }}>
               Prendas únicas,{" "}
               <span className="text-[#4ade80]">a tu alcance.</span>
             </h1>
@@ -167,7 +167,7 @@ const hasMore = skip + products.length < total;
           {/* Stats */}
           <div className="flex gap-3 md:flex-col">
             <div className="gg-stat-box">
-              <div className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+              <div className="gg-stat-num text-3xl font-extrabold text-[var(--gg-dark)]">
                 {total}
               </div>
               <div className="mt-0.5 text-xs font-medium text-[color:var(--gg-muted)]">
@@ -175,7 +175,7 @@ const hasMore = skip + products.length < total;
               </div>
             </div>
             <div className="gg-stat-box">
-              <div className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+              <div className="gg-stat-num text-3xl font-extrabold text-[var(--gg-dark)]">
                 {categories.length}
               </div>
               <div className="mt-0.5 text-xs font-medium text-[color:var(--gg-muted)]">

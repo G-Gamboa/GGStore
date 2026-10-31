@@ -1,12 +1,22 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
-const outfit = Outfit({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--gg-font-body",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  display: "swap",
+  variable: "--gg-font-display",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -46,7 +56,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <body className={`${inter.className} min-h-screen`}>
+      <body className={`${inter.variable} ${jakarta.variable} min-h-screen`}>
         <CartProvider>
           <Navbar />
           <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
@@ -100,7 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               {/* Crédito */}
               <div
-                className={`${outfit.className} mt-8 pt-6 flex items-baseline justify-center gap-2 text-sm text-[color:var(--gg-muted)]`}
+                className="mt-8 pt-6 flex items-baseline justify-center gap-2 text-sm text-[color:var(--gg-muted)]"
                 style={{ borderTop: "1px solid var(--gg-border-soft)" }}
               >
                 Desarrollado por

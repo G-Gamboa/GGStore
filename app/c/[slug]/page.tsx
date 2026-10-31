@@ -73,7 +73,7 @@ export default async function CategoryPage({
               >
                 <ArrowLeft size={13} /> Todas las categorías
               </Link>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white">
+              <h1 className="text-3xl font-extrabold text-white" style={{ letterSpacing: "-0.04em" }}>
                 {category.name}
               </h1>
               <p className="mt-1.5 text-sm text-green-200">
@@ -84,7 +84,7 @@ export default async function CategoryPage({
             </div>
 
             <div className="gg-stat-box self-start sm:self-auto">
-              <div className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+              <div className="gg-stat-num text-3xl font-extrabold text-[var(--gg-dark)]">
                 {products.length}
               </div>
               <div className="text-xs font-medium text-[color:var(--gg-muted)] mt-0.5">

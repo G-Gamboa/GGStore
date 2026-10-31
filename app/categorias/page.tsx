@@ -59,7 +59,7 @@ export default async function CategoriesPage() {
               <ShoppingBag size={26} className="text-green-200" />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-white">
+              <h1 className="text-3xl font-extrabold text-white" style={{ letterSpacing: "-0.04em" }}>
                 Categorías
               </h1>
               <p className="mt-1 text-sm text-green-200">

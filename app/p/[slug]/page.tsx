@@ -160,7 +160,7 @@ export default async function ProductPage({
               >
                 {p.category.name}
               </Link>
-              <h1 className="mt-2 text-2xl md:text-3xl font-extrabold tracking-tight leading-tight text-neutral-900">
+              <h1 className="mt-2 text-2xl md:text-3xl font-extrabold text-neutral-900" style={{ letterSpacing: "-0.035em", lineHeight: 1.1 }}>
                 {p.name}
               </h1>
 
