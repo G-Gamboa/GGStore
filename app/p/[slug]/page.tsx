@@ -82,7 +82,33 @@ export default async function ProductPage({
     ? cldImg(p.imageUrl, { w: 1200 })
     : "https://placehold.co/1200x1200/f0fdf4/14532d?text=GGStore";
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: p.name,
+    ...(p.description && { description: p.description }),
+    image: img,
+    ...(p.brand && { brand: { "@type": "Brand", name: p.brand } }),
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "GTQ",
+      price: p.priceQ,
+      availability:
+        p.status === "AVAILABLE"
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      url: `${siteUrl}/p/${p.slug}`,
+    },
+  };
+
   return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     <div className="space-y-4">
 
       {/* Breadcrumb */}
@@ -217,5 +243,6 @@ export default async function ProductPage({
         </div>
       </div>
     </div>
+    </>
   );
 }

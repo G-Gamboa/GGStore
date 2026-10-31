@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Outfit } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import { Leaf } from "lucide-react";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
 
-/* Tipografía de la marca Boa Estudio, solo para el crédito */
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 const outfit = Outfit({ subsets: ["latin"], weight: ["300", "700"], display: "swap" });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -14,11 +14,22 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "GGStore — Prendas de paca",
+    default: "GGStore — Prendas de paca en Guatemala",
     template: "%s | GGStore",
   },
   description:
-    "Catálogo de prendas únicas de segunda mano. Camisetas, pantalones, vestidos y más a precios increíbles. Pedidos por WhatsApp.",
+    "GGStore — Ropa de segunda mano seleccionada en Guatemala. Camisetas, pantalones, vestidos y más a precios increíbles. Pedidos directos por WhatsApp, sin complicaciones.",
+  keywords: [
+    "ropa segunda mano Guatemala",
+    "paca Guatemala",
+    "prendas usadas Guatemala",
+    "ropa barata Guatemala",
+    "GGStore Guatemala",
+    "ropa paca seleccionada",
+    "comprar ropa usada Guatemala",
+  ],
+  authors: [{ name: "GGStore" }],
+  robots: { index: true, follow: true },
   openGraph: {
     siteName: "GGStore",
     type: "website",
@@ -32,15 +43,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body style={{ fontFamily: "Inter, system-ui, sans-serif" }} className="min-h-screen">
+      <body className={`${inter.className} min-h-screen`}>
         <CartProvider>
           <Navbar />
           <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>

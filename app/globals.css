@@ -103,14 +103,14 @@ body {
 
 /* ── Price badge (floating on image) ─────────────────────── */
 .gg-price-badge {
-  background: var(--gg-dark);
+  background: #f59e0b;
   color: #ffffff;
   border-radius: 12px;
   padding: 0.3rem 0.7rem;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.30);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.40);
   display: inline-block;
 }
 
@@ -208,14 +208,14 @@ body {
 }
 
 .gg-button-primary {
-  background: var(--gg-primary);
-  color: var(--gg-dark);
+  background: #16a34a;
+  color: #ffffff;
 }
 
 .gg-button-primary:hover:not(:disabled) {
-  background: var(--gg-primary-deep);
+  background: #15803d;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(20, 83, 45, 0.18);
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.30);
 }
 
 .gg-button-ghost {
