@@ -165,11 +165,8 @@ export default async function ProductPage({
               </h1>
 
               {/* Precio destacado */}
-              <div className="mt-3 inline-flex items-baseline gap-2">
-                <span
-                  className="text-3xl font-extrabold tracking-tight"
-                  style={{ color: "var(--gg-dark)" }}
-                >
+              <div className="mt-3 flex items-center gap-2 flex-wrap">
+                <span className="gg-price-badge text-xl" style={{ fontSize: "1.25rem", padding: "0.4rem 0.9rem" }}>
                   {formatQ(p.priceQ)}
                 </span>
                 {p.condition !== null && (
