@@ -39,7 +39,7 @@ export default function ProductGrid({
       initial="hidden"
       animate="show"
       variants={container}
-      className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
     >
       {products.map((p) => (
         <motion.div key={p.id} variants={item}>

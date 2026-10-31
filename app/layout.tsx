@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
+import FloatingWhatsApp from "@/components/floating-whatsapp";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,6 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           <Navbar />
           <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
+
+          <FloatingWhatsApp />
 
           {/* Footer */}
           <footer className="gg-footer">

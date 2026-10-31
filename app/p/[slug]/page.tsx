@@ -6,6 +6,7 @@ import AddToCart from "./ui";
 import { formatQ } from "@/lib/money";
 import { cldImg } from "@/lib/cloudinary";
 import { Tag, Ruler, Palette, Shirt, Star, ArrowLeft, Search, PackageX } from "lucide-react";
+import ProductGrid from "@/components/product-grid";
 
 export const revalidate = 60;
 
@@ -65,6 +66,18 @@ export default async function ProductPage({
 
   const settings = await prisma.settings.findFirst();
   const showSold = settings?.showSoldPublic ?? false;
+
+  const related = await prisma.product.findMany({
+    where: {
+      categoryId: p.categoryId,
+      id: { not: p.id },
+      isActive: true,
+      status: "AVAILABLE",
+    },
+    orderBy: { createdAt: "desc" },
+    take: 4,
+    include: { category: true },
+  });
 
   if (p.status === "RESERVED" || (!showSold && p.status === "SOLD")) {
     return (
@@ -240,6 +253,24 @@ export default async function ProductPage({
         </div>
       </div>
     </div>
+
+      {/* Productos relacionados */}
+      {related.length > 0 && (
+        <section className="space-y-4 mt-8">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-[var(--gg-dark)]" style={{ letterSpacing: "-0.02em" }}>
+              Más en {p.category.name}
+            </h2>
+            <Link
+              href={`/c/${p.category.slug}`}
+              className="text-sm text-[color:var(--gg-muted)] hover:text-[var(--gg-dark)] transition-colors"
+            >
+              Ver todo →
+            </Link>
+          </div>
+          <ProductGrid products={related} showStatus={false} />
+        </section>
+      )}
     </>
   );
 }
