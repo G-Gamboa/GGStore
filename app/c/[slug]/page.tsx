@@ -69,14 +69,14 @@ export default async function CategoryPage({
             <div>
               <Link
                 href="/categorias"
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--gg-muted)] hover:text-[var(--gg-dark)] transition-colors mb-3"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-300 hover:text-white transition-colors mb-3"
               >
                 <ArrowLeft size={13} /> Todas las categorías
               </Link>
-              <h1 className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white">
                 {category.name}
               </h1>
-              <p className="mt-1.5 text-sm text-[color:var(--gg-muted)]">
+              <p className="mt-1.5 text-sm text-green-200">
                 {available > 0
                   ? `${available} ${available === 1 ? "prenda disponible" : "prendas disponibles"}`
                   : "Sin prendas disponibles ahora mismo"}

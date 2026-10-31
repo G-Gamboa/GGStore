@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:seed": "tsx prisma/seed.ts",
-    "import:products": "tsx scripts/import_products.ts"
+    "db:seed": "node --env-file=.env node_modules/tsx/dist/cli.mjs prisma/seed.ts",
+    "import:products": "tsx scripts/import_products.ts",
+    "reset-admin": "node --env-file=.env scripts/reset-admin.mjs"
   },
   "dependencies": {
     "@prisma/client": "6.19.2",

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Leaf, LayoutGrid, ShoppingBag, Menu, X } from "lucide-react";
+import { LayoutGrid, ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useCart } from "@/components/cart-store";
 
@@ -81,14 +81,18 @@ export default function Navbar() {
         {/* Brand */}
         <Link href="/" className="gg-brand group">
           <motion.span
-            whileHover={{ rotate: [0, -10, 10, 0] }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-2xl shadow-sm"
-            style={{ background: "var(--gg-primary)" }}
+            whileHover={{ scale: 1.08 }}
+            transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            className="inline-flex"
           >
-            <Leaf size={17} className="text-[var(--gg-dark)]" />
+            <svg width="36" height="36" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="44" height="44" rx="12" fill="#14532d"/>
+              <path d="M22 32 C22 32 9 24 9 14 C9 8 14.5 6 22 9.5 Z" fill="#4ade80"/>
+              <path d="M22 32 C22 32 35 24 35 14 C35 8 29.5 6 22 9.5 Z" fill="#86efac"/>
+              <path d="M22 9.5 L22 34" stroke="#d1fae5" strokeWidth="1.4" strokeLinecap="round"/>
+            </svg>
           </motion.span>
-          <span className="gg-gradient-text text-lg">GGStore</span>
+          <span className="gg-gradient-text text-xl font-black tracking-tight">GGStore</span>
         </Link>
 
         {/* Desktop nav */}

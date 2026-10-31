@@ -125,16 +125,16 @@ const hasMore = skip + products.length < total;
 
           {/* Copy */}
           <div className="space-y-5 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-3 py-1 text-xs font-semibold text-[var(--gg-dark)] backdrop-blur-sm">
-              ✨ Paca seleccionada · Guatemala
+            <div className="inline-flex items-center gap-2 rounded-full border border-green-500/40 bg-white/10 px-3 py-1 text-xs font-semibold text-green-200 backdrop-blur-sm">
+              Paca seleccionada · Guatemala
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-[var(--gg-dark)]">
+            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight text-white">
               Prendas únicas,{" "}
-              <span className="gg-gradient-text">a tu alcance.</span>
+              <span className="text-[#4ade80]">a tu alcance.</span>
             </h1>
 
-            <p className="text-[color:var(--gg-muted)] text-base leading-relaxed">
+            <p className="text-green-200 text-base leading-relaxed">
               Ropa de segunda mano cuidadosamente seleccionada.
               Pedidos por WhatsApp, sin complicaciones.
             </p>

@@ -46,16 +46,16 @@ export default async function CategoriesPage() {
         <div className="relative z-10 p-8 md:p-10">
           <div className="flex items-center gap-4">
             <div
-              className="h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 text-2xl"
-              style={{ background: "rgba(255,255,255,0.65)", backdropFilter: "blur(8px)" }}
+              className="h-14 w-14 rounded-2xl flex items-center justify-center shrink-0"
+              style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.25)" }}
             >
-              🛍️
+              <ShoppingBag size={26} className="text-green-200" />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold tracking-tight text-[var(--gg-dark)]">
+              <h1 className="text-3xl font-extrabold tracking-tight text-white">
                 Categorías
               </h1>
-              <p className="mt-1 text-sm text-[color:var(--gg-muted)]">
+              <p className="mt-1 text-sm text-green-200">
                 {categories.length}{" "}
                 {categories.length === 1 ? "categoría disponible" : "categorías disponibles"} ·
                 Explora toda la colección

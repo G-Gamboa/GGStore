@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Inter, Outfit } from "next/font/google";
-import { Leaf } from "lucide-react";
 import Navbar from "@/components/navbar";
 import { CartProvider } from "@/components/cart-store";
 
@@ -38,6 +37,10 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  icons: {
+    icon: "/logo.svg",
+    apple: "/logo.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -54,15 +57,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
                 {/* Brand */}
                 <div className="flex items-center gap-2.5">
-                  <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-2xl"
-                    style={{ background: "var(--gg-primary)" }}
-                  >
-                    <Leaf size={17} className="text-[var(--gg-dark)]" />
-                  </span>
+                  <svg width="36" height="36" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect width="44" height="44" rx="12" fill="#14532d"/>
+                    <path d="M22 32 C22 32 9 24 9 14 C9 8 14.5 6 22 9.5 Z" fill="#4ade80"/>
+                    <path d="M22 32 C22 32 35 24 35 14 C35 8 29.5 6 22 9.5 Z" fill="#86efac"/>
+                    <path d="M22 9.5 L22 34" stroke="#d1fae5" strokeWidth="1.4" strokeLinecap="round"/>
+                  </svg>
                   <div>
                     <div className="font-bold text-[var(--gg-dark)] leading-tight">GGStore</div>
-                    <div className="text-[10px] text-[color:var(--gg-muted)]">Guatemala 🇬🇹</div>
+                    <div className="text-[10px] text-[color:var(--gg-muted)]">Guatemala</div>
                   </div>
                 </div>
 
